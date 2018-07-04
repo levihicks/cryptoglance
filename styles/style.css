@@ -1,0 +1,17 @@
+html {
+	height: 100%;
+}
+
+body {
+  	min-width: 500px;
+	max-width: 960px;
+	width: 60%;
+  	margin: auto;
+	font-family: 'helvetica';
+}
+
+h1{
+	margin: auto;
+	max-width: 600px;
+	text-align: center;
+}
