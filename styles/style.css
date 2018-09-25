@@ -1,21 +1,33 @@
 html {
 	height: 100%;
+	background:  #e6e600;
+  color: #1a1a1a;
 }
 
 body {
-  	min-width: 500px;
-	max-width: 960px;
+	height: 80%;
+	margin: auto;
 	width: 60%;
-  	margin: auto;
-	font-family: 'helvetica';
+  min-width: 500px;
+	max-width: 960px;
+	font-family: arial;
 }
 
-h1{
-	margin: auto;
-	max-width: 600px;
+h1, .addPrompt{
 	text-align: center;
 }
 
-p{
+.addPrompt{
+	height: 50%;
+}
+
+.addButtonAndMsg{
+	text-align:center;
+   position:relative;
+   top:50%;
+   transform: translateY(-50%);
+}
+
+p, button{
 	display: inline;
 }
