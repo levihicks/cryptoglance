@@ -1,6 +1,6 @@
 html {
 	height: 100%;
-	background:  #e6e600;
+	background:  yellow;
   color: #1a1a1a;
 }
 
@@ -10,22 +10,33 @@ body {
 	width: 60%;
   min-width: 500px;
 	max-width: 960px;
-	font-family: arial;
+	font-family: 'ubuntu', sans-serif;
 }
 
 h1, .addPrompt{
 	text-align: center;
 }
 
-.addPrompt{
-	height: 50%;
+h1{
+	border-bottom: 2px solid red;
+	border-top: 2px solid green;
+  width: 200px;
+  margin: 20px auto;
+	background: white;
 }
 
-.addButtonAndMsg{
+.addPrompt{
+	height: 100%;
+	border-radius: 10px;
+	border: 1px solid black;
+}
+
+.msg{
 	text-align:center;
    position:relative;
    top:50%;
    transform: translateY(-50%);
+	font-style: italic;
 }
 
 p, button{
