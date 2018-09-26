@@ -1,6 +1,6 @@
 html {
 	height: 100%;
-	background:  yellow;
+	background:  lightyellow;
   color: #1a1a1a;
 }
 
@@ -29,6 +29,8 @@ h1{
 	height: 100%;
 	border-radius: 10px;
 	border: 1px solid black;
+	background: black;
+	color: white;
 }
 
 .msg{
