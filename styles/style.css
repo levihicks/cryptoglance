@@ -5,15 +5,13 @@ html {
 }
 
 body {
-	height: 80%;
+  height: 85%;
+
 	margin: auto;
-	width: 60%;
-  min-width: 500px;
-	max-width: 960px;
 	font-family: 'ubuntu', sans-serif;
 }
 
-h1, .addPrompt{
+h1, .portfolio{
 	text-align: center;
 }
 
@@ -22,25 +20,48 @@ h1{
 	border-top: 2px solid green;
   width: 200px;
   margin: 20px auto;
-	background: white;
 }
 
-.addPrompt{
+main{
+	width: 100%;
+  
+	
+}
+
+main, .portfolio{
 	height: 100%;
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+}
+
+.portfolio{
 	border-radius: 10px;
-	border: 1px solid black;
 	background: black;
 	color: white;
+	width: 70%;
+	max-width: 900px;
+	min-width: 500px;
 }
 
 .msg{
 	text-align:center;
-   position:relative;
-   top:50%;
-   transform: translateY(-50%);
+  position:relative;
+  top:50%;
+  transform: translateY(-50%);
 	font-style: italic;
 }
 
-p, button{
+p {
 	display: inline;
+}
+
+.search{
+	display: inline-block;
+  height: 100%;
+	width: 25%;
+	max-width: 385px;
+	min-width: 200px;
+	border-radius: 10px;
+	background: gray;
 }
