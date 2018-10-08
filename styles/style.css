@@ -69,6 +69,8 @@ p {
 #searchInput, button[name=searchButton]{
 	border: none;
 	border-radius: 10px;
+	height: 25px;
+	margin-top: 3px;
 }
 
 #searchInput{
