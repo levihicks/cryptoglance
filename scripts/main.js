@@ -4,25 +4,41 @@ var $searchList = $(".searchResults ul");
 var markets, query;
 var marketsURL = 'https://cors.io/?https://www.bittrex.com/api/v1.1/public/getmarkets';
 
-
 $searchInput.keyup(function(event){
-	query = event.target.value;
+	displayResults();
+});
+
+function displayResults(){
+	query = $searchInput.val();
 	$searchList.empty();
 	if(markets){
 		markets.forEach(function(market){
 			if ((market.MarketCurrencyLong.toLowerCase().startsWith(query.toLowerCase())
 				|| market.MarketCurrency.toLowerCase().startsWith(query.toLowerCase()))
 				&& query!="")
-				$searchList.append($("<li>").text(market.MarketCurrencyLong));
+			{
+				var $tagDiv = $("<div>").text("("+market.MarketName+")");
+				var $nameDiv = $("<div>").text(market.MarketCurrencyLong);
+				var $searchEl = $("<li>");
+				$searchEl.append($nameDiv);
+				$searchEl.append($tagDiv);
+				$searchList.append($searchEl);
+			}
 		});
 	}
-});
+	else{
+		$searchList.append($("<li>").text('Loading...'));
+	}
+}
 
 var main = function(){
+	$searchInput.val("");
 	fetch(marketsURL).then(function(response) {
 	  	response.text().then(function(text) {
 	    markets = JSON.parse(text);
 	    markets = markets.result;
+	    if($searchInput != "")
+	    	displayResults();
 	  });
 	});
 };

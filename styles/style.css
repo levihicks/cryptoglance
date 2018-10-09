@@ -5,8 +5,9 @@ html {
 }
 
 body {
-  height: 85%;
-
+	height: 95%;
+  min-height: 300px;
+	max-height: 900px;
 	margin: auto;
 	font-family: 'ubuntu', sans-serif;
 }
@@ -19,16 +20,18 @@ h1{
 	border-bottom: 2px solid red;
 	border-top: 2px solid green;
   width: 200px;
-  margin: 20px auto;
+  margin: 10px auto; 
 }
 
 main{
 	width: 100%;
   min-width: 800px;
+	height: 93%;
 }
 
 main, .portfolio{
-	height: 100%;
+	min-height: 300px;
+	max-height: 900px;
 	display: inline-block;
 	vertical-align: top;
 	text-align: center;
@@ -42,6 +45,7 @@ main, .portfolio{
 	width: 70%;
 	max-width: 900px;
 	min-width: 500px;
+	height: 100%;
 }
 
 .msg{
@@ -59,11 +63,14 @@ p {
 .search{
 	display: inline-block;
   height: 100%;
+	min-height: 300px;
+	max-height: 900px;
 	width: 25%;
 	max-width: 385px;
 	min-width: 200px;
 	border-radius: 10px;
 	background: gray;
+	overflow: auto;
 }
 
 #searchInput, button[name=searchButton]{
@@ -80,7 +87,19 @@ p {
 	padding-left: 5px;
 }
 
-button[name=searchButton] {
-	width: 24px;
-	background: whitesmoke;
+ul{
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	font-family: monospace;
+	list-style: none;
+	border-bottom: dashed 1px black;
+	padding: 5px 0;
+}
+
+li:first-child{
+	border-top: 1px dashed black;
+	margin-top: 5px;
 }
