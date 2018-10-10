@@ -17,8 +17,8 @@ function displayResults(){
 				|| market.MarketCurrency.toLowerCase().startsWith(query.toLowerCase()))
 				&& query!="")
 			{
-				var $tagDiv = $("<div>").text("("+market.MarketName+")");
-				var $nameDiv = $("<div>").text(market.MarketCurrencyLong);
+				var $tagDiv = $("<div>").text("("+market.MarketName+")").attr("class", "searchTag");
+				var $nameDiv = $("<div>").text(market.MarketCurrencyLong).attr("class", "searchName");
 				var $searchEl = $("<li>");
 				$searchEl.append($nameDiv);
 				$searchEl.append($tagDiv);

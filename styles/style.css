@@ -95,11 +95,18 @@ ul{
 li {
 	font-family: monospace;
 	list-style: none;
-	border-bottom: dashed 1px black;
-	padding: 5px 0;
+	border-bottom: solid 1px black;
+	padding: 15px 0;
+	color: whitesmoke;
+	width: 90%;
+	margin: 0 auto;
 }
 
 li:first-child{
-	border-top: 1px dashed black;
+	border-top: 1px solid black;
 	margin-top: 5px;
+}
+
+.searchTag, .searchName{
+	display: inline;
 }
