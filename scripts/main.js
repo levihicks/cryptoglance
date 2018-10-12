@@ -19,9 +19,15 @@ function displayResults(){
 			{
 				var $tagDiv = $("<div>").text("("+market.MarketName+")").attr("class", "searchTag");
 				var $nameDiv = $("<div>").text(market.MarketCurrencyLong).attr("class", "searchName");
+				var $coinInfoDiv = $("<div>").attr("class", "coinInfo");
+				$coinInfoDiv.append($nameDiv);
+				$coinInfoDiv.append($tagDiv);
+				var $addButton = $("<button>").text("+").attr("name", "searchAdd");
+				var $addButtonDiv = $("<div>").attr("class", "searchAddContainer");
+				$addButtonDiv.append($addButton);
 				var $searchEl = $("<li>");
-				$searchEl.append($nameDiv);
-				$searchEl.append($tagDiv);
+				$searchEl.append($addButtonDiv);
+				$searchEl.append($coinInfoDiv);
 				$searchList.append($searchEl);
 			}
 		});
