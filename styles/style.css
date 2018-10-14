@@ -138,3 +138,16 @@ button[name=searchAdd]{
 .searchTag, .searchName{
   display: inline-block;	
 }
+
+.background{
+	position: fixed;
+	background-color: rgba(10, 10, 10, 0.5);;
+	top: 0;
+}
+
+.addPrompt{
+	position: fixed;
+	height: 360px;
+	width: 640px;
+	background: white;
+}

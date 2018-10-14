@@ -1,6 +1,7 @@
 var $searchInput = $("#searchInput");
 var $searchButton = $("button[name=searchButton");
 var $searchList = $(".searchResults ul");
+var $main = $("main");
 var markets, query;
 var marketsURL = 'https://cors.io/?https://www.bittrex.com/api/v1.1/public/getmarkets';
 
@@ -23,6 +24,16 @@ function displayResults(){
 				$coinInfoDiv.append($nameDiv);
 				$coinInfoDiv.append($tagDiv);
 				var $addButton = $("<button>").text("+").attr("name", "searchAdd");
+				$addButton.click(function(){
+					var $background = $("<div>").attr("class", "background");
+					$background.innerHeight(window.innerHeight);
+					$background.innerWidth(window.innerWidth);
+					var $addPrompt = $("<div>").attr("class", "addPrompt");
+					$addPrompt.offset({top: (window.innerHeight/2)-180, left: (window.innerWidth/2)-320});
+					$main.append($background);
+					$main.append($addPrompt);
+
+				});
 				var $addButtonDiv = $("<div>").attr("class", "searchAddContainer");
 				$addButtonDiv.append($addButton);
 				var $searchEl = $("<li>");
