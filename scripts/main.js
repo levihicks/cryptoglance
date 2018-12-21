@@ -9,14 +9,26 @@ $searchInput.keyup(function(event){
 	displayResults();
 });
 
-function displayAddButton(){
+function displayAddForm($parent){
 	var $background = $("<div>").attr("class", "background");
 	$background.innerHeight(window.innerHeight);
 	$background.innerWidth(window.innerWidth);
 	var $addPrompt = $("<div>").attr("class", "addPrompt");
 	$addPrompt.offset({top: (window.innerHeight/2)-180, left: (window.innerWidth/2)-320});
+	var coinName = $parent.find(".searchName").html();
+	var fullTag = $parent.find(".searchTag").html().slice(1, -1);
+	var tags = fullTag.split("-");
+	var baseTag = tags[0];
+	var coinTag = tags[1];
+	var $cancelButton = $("<button>").text("x").attr("name", "addCancel");
+	var $cancelButtonDiv = $("<div>").attr("class", "cancelButtonContainer");
+	$cancelButtonDiv.append($cancelButton);
+	$addPrompt.append($cancelButtonDiv);
+	var $addNameDiv = $("<div>").text(coinName).attr("class", "addNameContainer");
+	$addPrompt.append($addNameDiv);
 	$main.append($background);
 	$main.append($addPrompt);
+
 }
 
 function displayResults(){
@@ -35,7 +47,8 @@ function displayResults(){
 				$coinInfoDiv.append($tagDiv);
 				var $addButton = $("<button>").text("+").attr("name", "searchAdd");
 				$addButton.click(function(){
-					displayAddButton();
+					var $parent = $addButton.parent().parent();
+					displayAddForm($parent);
 				});
 				var $addButtonDiv = $("<div>").attr("class", "searchAddContainer");
 				$addButtonDiv.append($addButton);
