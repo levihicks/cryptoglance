@@ -9,6 +9,16 @@ $searchInput.keyup(function(event){
 	displayResults();
 });
 
+function displayAddButton(){
+	var $background = $("<div>").attr("class", "background");
+	$background.innerHeight(window.innerHeight);
+	$background.innerWidth(window.innerWidth);
+	var $addPrompt = $("<div>").attr("class", "addPrompt");
+	$addPrompt.offset({top: (window.innerHeight/2)-180, left: (window.innerWidth/2)-320});
+	$main.append($background);
+	$main.append($addPrompt);
+}
+
 function displayResults(){
 	query = $searchInput.val();
 	$searchList.empty();
@@ -25,14 +35,7 @@ function displayResults(){
 				$coinInfoDiv.append($tagDiv);
 				var $addButton = $("<button>").text("+").attr("name", "searchAdd");
 				$addButton.click(function(){
-					var $background = $("<div>").attr("class", "background");
-					$background.innerHeight(window.innerHeight);
-					$background.innerWidth(window.innerWidth);
-					var $addPrompt = $("<div>").attr("class", "addPrompt");
-					$addPrompt.offset({top: (window.innerHeight/2)-180, left: (window.innerWidth/2)-320});
-					$main.append($background);
-					$main.append($addPrompt);
-
+					displayAddButton();
 				});
 				var $addButtonDiv = $("<div>").attr("class", "searchAddContainer");
 				$addButtonDiv.append($addButton);
