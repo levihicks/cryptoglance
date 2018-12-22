@@ -14,7 +14,7 @@ function displayAddForm($parent){
 	$background.innerHeight(window.innerHeight);
 	$background.innerWidth(window.innerWidth);
 	var $addPrompt = $("<div>").attr("class", "addPrompt");
-	$addPrompt.offset({top: (window.innerHeight/2)-180, left: (window.innerWidth/2)-320});
+	$addPrompt.offset({top: (window.innerHeight/2)-100, left: (window.innerWidth/2)-250});
 	var coinName = $parent.find(".searchName").html();
 	var fullTag = $parent.find(".searchTag").html().slice(1, -1);
 	var tags = fullTag.split("-");
