@@ -23,6 +23,11 @@ function displayAddForm($parent){
 	var $cancelButton = $("<button>").text("x").attr("name", "addCancel");
 	var $cancelButtonDiv = $("<div>").attr("class", "cancelButtonContainer");
 	$cancelButtonDiv.append($cancelButton);
+	$cancelButton.click(function(){
+		var $parent = $cancelButtonDiv.parent();
+		$parent.prev().remove();
+		$parent.remove();
+	});
 	$addPrompt.append($cancelButtonDiv);
 	var $addNameDiv = $("<div>").text(coinName).attr("class", "addNameContainer");
 	$addPrompt.append($addNameDiv);
