@@ -4,7 +4,7 @@ var $searchList = $(".searchResults ul");
 var $main = $("main");
 var markets, query;
 var marketsURL = 'https://cors.io/?https://www.bittrex.com/api/v1.1/public/getmarkets';
-
+var added = [];
 $searchInput.keyup(function(event){
 	displayResults();
 });
@@ -55,6 +55,12 @@ function displayAddForm($parent){
 	$confirmAddButton.attr("onclick", "");
 	var $confirmAddDiv = $("<div>").attr("class", "confirmAddContainer");
 	$confirmAddDiv.append($confirmAddButton);
+	$confirmAddButton.click(function(){
+		var quantity = $("#addQuantity").val();
+		var cost = $("#addCost").val();
+		var tag = fullTag;
+		added.push({tag: tag, quantity: quantity, cost: cost});
+	});
 	$addPrompt.append($confirmAddDiv);
 	$main.append($background);
 	$main.append($addPrompt);
