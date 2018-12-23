@@ -39,7 +39,7 @@ main, .portfolio{
 
 .portfolio{
 	display: inline-block;
-	border: 2px solid gray;
+
 	border-radius: 10px;
 	background: black;
 	color: white;
@@ -72,7 +72,7 @@ p {
 	border-radius: 10px;
 	background: gray;
 	overflow: auto;
-	border: 2px solid black;
+
 }
 
 #searchInput, button[name=searchButton]{
@@ -199,6 +199,12 @@ button[name=searchAdd]{
 	margin: 0 5px 5px 0;
 }
 
+.addError{
+	color: darkred;
+	position: absolute;
+	bottom: 0;
+	margin: 0 0 5px 5px;
+}
 
 
 

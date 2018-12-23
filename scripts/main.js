@@ -8,6 +8,21 @@ var added = [];
 $searchInput.keyup(function(event){
 	displayResults();
 });
+var re = /^[\d]*[\.]?[\d]+$/;
+
+function removeAddPrompt($parent){
+	$parent.prev().remove();
+	$parent.remove();
+}
+
+function displayAddError(msg){
+	var $promptBox = $(".addPrompt");
+	var $errorContainer = $("<div>").text(msg).attr("class", "addError");
+	if($promptBox.children().last().attr("class")=="addError"){
+		$promptBox.children().last().remove();
+	}
+	$promptBox.append($errorContainer);
+}
 
 function displayAddForm($parent){
 	var $background = $("<div>").attr("class", "background");
@@ -24,9 +39,7 @@ function displayAddForm($parent){
 	var $cancelButtonDiv = $("<div>").attr("class", "cancelButtonContainer");
 	$cancelButtonDiv.append($cancelButton);
 	$cancelButton.click(function(){
-		var $parent = $cancelButtonDiv.parent();
-		$parent.prev().remove();
-		$parent.remove();
+		removeAddPrompt($cancelButtonDiv.parent());
 	});
 	$addPrompt.append($cancelButtonDiv);
 	var $addNameDiv = $("<div>").text(coinName).attr("class", "addNameContainer");
@@ -58,8 +71,18 @@ function displayAddForm($parent){
 	$confirmAddButton.click(function(){
 		var quantity = $("#addQuantity").val();
 		var cost = $("#addCost").val();
-		var tag = fullTag;
-		added.push({tag: tag, quantity: quantity, cost: cost});
+		switch(false){
+			case re.test(quantity):
+				displayAddError("Invalid Quantity");
+				break;
+			case re.test(cost):
+				displayAddError("Invalid Cost");
+				break;
+			default:
+				var tag = fullTag;
+				added.push({tag: tag, quantity: quantity, cost: cost});
+				removeAddPrompt($cancelButtonDiv.parent());
+		}	
 	});
 	$addPrompt.append($confirmAddDiv);
 	$main.append($background);
