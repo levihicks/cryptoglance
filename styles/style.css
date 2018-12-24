@@ -118,11 +118,11 @@ button[name=searchAdd]{
   height: 20px;
 	width: 20px;
 	padding: 0;
-	background:  #33cc33;
+	background:  gray;
 	color: white;
 	font-size: 15px;
   font-weight: bold;
-	border: none;
+	border: 1px solid lightgreen;
 	border-radius: 5px;
 	margin-right: 2px;
   vertical-align: middle;
@@ -162,8 +162,9 @@ button[name=searchAdd]{
 	margin-top: 5px;
 }
 .cancelButtonContainer button{
-  background: white;
-	border: none;
+  background: gray;
+	border: 1px dashed darkred;
+	color: darkred;
 }
 
 .addNameContainer{
@@ -197,6 +198,12 @@ button[name=searchAdd]{
 	right: 0;
 	bottom: 0;
 	margin: 0 5px 5px 0;
+}
+
+.confirmAddContainer input{
+	background: gray;
+	border: 1px dashed lightgreen;
+	color: lightgreen;
 }
 
 .addError{
