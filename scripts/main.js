@@ -24,6 +24,20 @@ function displayAddError(msg){
 	$promptBox.append($errorContainer);
 }
 
+function checkInput(quantity, cost){
+	
+	switch(false){
+		case re.test(quantity):
+			displayAddError("Invalid Quantity");
+			return false;
+		case re.test(cost):
+			displayAddError("Invalid Cost");
+			return false;
+		default:
+			return true;
+	}	
+}
+
 function displayAddForm($parent){
 	var $background = $("<div>").attr("class", "background");
 	$background.innerHeight(window.innerHeight);
@@ -71,18 +85,11 @@ function displayAddForm($parent){
 	$confirmAddButton.click(function(){
 		var quantity = $("#addQuantity").val();
 		var cost = $("#addCost").val();
-		switch(false){
-			case re.test(quantity):
-				displayAddError("Invalid Quantity");
-				break;
-			case re.test(cost):
-				displayAddError("Invalid Cost");
-				break;
-			default:
-				var tag = fullTag;
-				added.push({tag: tag, quantity: quantity, cost: cost});
-				removeAddPrompt($cancelButtonDiv.parent());
-		}	
+		if(checkInput(quantity, cost)){
+			var tag = fullTag;
+			added.push({tag: tag, quantity: quantity, cost: cost});
+			removeAddPrompt($cancelButtonDiv.parent());
+		}
 	});
 	$addPrompt.append($confirmAddDiv);
 	$main.append($background);
