@@ -87,7 +87,7 @@ function displayAddForm($parent){
 		var cost = Number($("#addCost").val());
 		if(checkInput(quantity, cost)){
 			var tag = fullTag;
-			var newCoin = {tag: tag, quantity: quantity, cost: cost};
+			var newCoin = {name: coinName, tag: tag, quantity: quantity, cost: cost};
 			var isIn = false;
 			added.forEach (function (coin){
 				if (coin.tag == newCoin.tag){
@@ -110,21 +110,34 @@ function displayAddForm($parent){
 
 }
 
+function displayPortfolioCoin(coin){
+	$portfolioLi = $("<li>");
+	var $nameContainer = $("<div>").text(coin.name).attr("class", "portfolioName");
+	var $amountContainer = $("<div>").text(coin.quantity).attr("class", "portfolioQuantity");
+	var $costContainer = $("<div>").text(coin.cost).attr("class", "portfolioCost");
+	$portfolioLi.append($nameContainer, $amountContainer, $costContainer);
+	$("#portfolio").append($portfolioLi);
+
+}
+
 function updatePortfolio(){
 	if (added.length != 0){
 
 		$(".msg").remove();
-		if($portfolioDiv.find(".portfolio").length>0){
-			var $portfolio = $(".portfolio");
+		if($portfolioDiv.find("#portfolio").length>0){
+			var $portfolio = $("#portfolio");
+			$portfolio.empty();
 			
 		}
 			
 		else{
-			var $portfolio = $("<ul>").attr("class", "portfolio");
+			var $portfolio = $("<ul>").attr("id", "portfolio");
 			$portfolioDiv.append($portfolio);
 		}
 		
-		
+		added.forEach(function(coin){
+				displayPortfolioCoin(coin);
+		});
 	}
 }
 
