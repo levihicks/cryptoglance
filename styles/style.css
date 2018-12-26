@@ -12,7 +12,7 @@ body {
 	font-family: 'ubuntu', sans-serif;
 }
 
-h1, .portfolio{
+h1, .portfolioContainer{
 	text-align: center;
 }
 
@@ -29,7 +29,7 @@ main{
 	height: 93%;
 }
 
-main, .portfolio{
+main, .portfolioContainer{
 	min-height: 300px;
 	max-height: 900px;
 	display: inline-block;
@@ -37,7 +37,7 @@ main, .portfolio{
 	text-align: center;
 }
 
-.portfolio{
+.portfolioContainer{
 	display: inline-block;
 
 	border-radius: 10px;

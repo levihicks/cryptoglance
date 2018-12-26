@@ -1,14 +1,15 @@
 var $searchInput = $("#searchInput");
-var $searchButton = $("button[name=searchButton");
+var $searchButton = $("button[name=searchButton]");
 var $searchList = $(".searchResults ul");
 var $main = $("main");
+var $portfolioDiv = $(".portfolioContainer");
 var markets, query;
 var marketsURL = 'https://cors.io/?https://www.bittrex.com/api/v1.1/public/getmarkets';
 var added = [];
 $searchInput.keyup(function(event){
 	displayResults();
 });
-var re = /^[\d]*[\.]?[\d]+$/;
+var re = /(^[\d]*[\.]?[\d]+$)|(^[\d]+[\.]$)/;
 
 function removeAddPrompt($parent){
 	$parent.prev().remove();
@@ -25,7 +26,6 @@ function displayAddError(msg){
 }
 
 function checkInput(quantity, cost){
-	
 	switch(false){
 		case re.test(quantity):
 			displayAddError("Invalid Quantity");
@@ -83,18 +83,49 @@ function displayAddForm($parent){
 	var $confirmAddDiv = $("<div>").attr("class", "confirmAddContainer");
 	$confirmAddDiv.append($confirmAddButton);
 	$confirmAddButton.click(function(){
-		var quantity = $("#addQuantity").val();
-		var cost = $("#addCost").val();
+		var quantity = Number($("#addQuantity").val());
+		var cost = Number($("#addCost").val());
 		if(checkInput(quantity, cost)){
 			var tag = fullTag;
-			added.push({tag: tag, quantity: quantity, cost: cost});
+			var newCoin = {tag: tag, quantity: quantity, cost: cost};
+			var isIn = false;
+			added.forEach (function (coin){
+				if (coin.tag == newCoin.tag){
+					coin.quantity+=newCoin.quantity;
+					coin.cost += newCoin.cost;
+					isIn = true;
+				}
+			});
+			if(!isIn){
+				added.push(newCoin);
+				console.log("added");
+			}
 			removeAddPrompt($cancelButtonDiv.parent());
+			updatePortfolio();
 		}
 	});
 	$addPrompt.append($confirmAddDiv);
 	$main.append($background);
 	$main.append($addPrompt);
 
+}
+
+function updatePortfolio(){
+	if (added.length != 0){
+
+		$(".msg").remove();
+		if($portfolioDiv.find(".portfolio").length>0){
+			var $portfolio = $(".portfolio");
+			
+		}
+			
+		else{
+			var $portfolio = $("<ul>").attr("class", "portfolio");
+			$portfolioDiv.append($portfolio);
+		}
+		
+		
+	}
 }
 
 function displayResults(){
