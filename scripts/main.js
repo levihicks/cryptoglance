@@ -87,7 +87,7 @@ function displayAddForm($parent){
 		var cost = Number($("#addCost").val());
 		if(checkInput(quantity, cost)){
 			var tag = fullTag;
-			var newCoin = {name: coinName, tag: tag, quantity: quantity, cost: cost};
+			var newCoin = {name: coinName, tag: tag, quantity: quantity, cost: quantity*cost};
 			var isIn = false;
 			added.forEach (function (coin){
 				if (coin.tag == newCoin.tag){
@@ -117,8 +117,8 @@ function displayPortfolioCoin(coin){
 	$editButtonContainer.append($editButton);
 	var $nameContainer = $("<div>").text(coin.name).attr("class", "portfolioName");
 	var $tagContainer = $("<div>").text("("+coin.tag+")").attr("class", "portfolioTag");
-	var $amountContainer = $("<div>").text(coin.quantity).attr("class", "portfolioQuantity");
-	var $costContainer = $("<div>").text(coin.cost).attr("class", "portfolioCost");
+	var $amountContainer = $("<div>").text("Total Quantity: "+coin.quantity).attr("class", "portfolioQuantity");
+	var $costContainer = $("<div>").text("Total Initial Cost: "+coin.cost).attr("class", "portfolioCost");
 	var $portfolioInfoContainer = $("<div>").attr("class", "portfolioInfo");
 	$portfolioInfoContainer.append($nameContainer, $tagContainer, $amountContainer, $costContainer);
 	$portfolioLi.append($editButtonContainer, $portfolioInfoContainer);

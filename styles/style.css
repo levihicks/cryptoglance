@@ -39,7 +39,7 @@ main, .portfolioContainer{
 
 .portfolioContainer{
 	display: inline-block;
-
+ 
 	border-radius: 10px;
 	background: black;
 	color: white;
@@ -58,12 +58,23 @@ main, .portfolioContainer{
 }
 
 #portfolio li {
-	background: white;
+  background: white;
   color: black;
-	border-radius: 10px;
+	margin: 0;
+	overflow: auto;
 	position: relative;
 	padding: 3px 0;
-	width: 99%;
+	width: 100%;
+	border: none;
+}
+
+#portfolio li:nth-child(1){
+	border-radius: 10px 10px 0 0;
+}
+
+#portfolio li:nth-child(odd){
+	background: gray;
+	color: white;
 }
 
 .editButton{
@@ -73,18 +84,18 @@ main, .portfolioContainer{
 
 .editButton input{
 	vertical-align: middle;
-  
 }
 
 #portfolio li input{
-  background: white;
+  background: inherit;
 	border: none;
-	color: gray;
+	color: lightgray;
   
 }
 
 .portfolioInfo{
   display: inline-block;
+	margin-left: 5%;
 }
 
 
