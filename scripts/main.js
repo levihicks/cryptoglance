@@ -112,17 +112,22 @@ function displayAddForm($parent){
 
 function displayPortfolioCoin(coin){
 	$portfolioLi = $("<li>");
+	var $editButtonContainer = $("<div>").attr("class", "editButton");
+	var $editButton = $("<input>").attr("value", "[Edit]").attr("type", "button");
+	$editButtonContainer.append($editButton);
 	var $nameContainer = $("<div>").text(coin.name).attr("class", "portfolioName");
+	var $tagContainer = $("<div>").text("("+coin.tag+")").attr("class", "portfolioTag");
 	var $amountContainer = $("<div>").text(coin.quantity).attr("class", "portfolioQuantity");
 	var $costContainer = $("<div>").text(coin.cost).attr("class", "portfolioCost");
-	$portfolioLi.append($nameContainer, $amountContainer, $costContainer);
+	var $portfolioInfoContainer = $("<div>").attr("class", "portfolioInfo");
+	$portfolioInfoContainer.append($nameContainer, $tagContainer, $amountContainer, $costContainer);
+	$portfolioLi.append($editButtonContainer, $portfolioInfoContainer);
 	$("#portfolio").append($portfolioLi);
 
 }
 
 function updatePortfolio(){
 	if (added.length != 0){
-
 		$(".msg").remove();
 		if($portfolioDiv.find("#portfolio").length>0){
 			var $portfolio = $("#portfolio");

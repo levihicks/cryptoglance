@@ -57,6 +57,42 @@ main, .portfolioContainer{
 	font-style: italic;
 }
 
+#portfolio li {
+	background: white;
+  color: black;
+	border-radius: 10px;
+	position: relative;
+	padding: 3px 0;
+	width: 99%;
+}
+
+.editButton{
+  display: inline;
+  vertical-align: 100%;
+}
+
+.editButton input{
+	vertical-align: middle;
+  
+}
+
+#portfolio li input{
+  background: white;
+	border: none;
+	color: gray;
+  
+}
+
+.portfolioInfo{
+  display: inline-block;
+}
+
+
+
+.portfolioName, .portfolioTag{
+	display: inline;
+}
+
 p {
 	display: inline;
 }
@@ -207,7 +243,10 @@ button[name=searchAdd]{
 }
 
 .addError{
-	color: darkred;
+	color: white;
+	background: darkred;
+	padding: 0 3px;
+	border-radius: 5px;
 	position: absolute;
 	bottom: 0;
 	margin: 0 0 5px 5px;
