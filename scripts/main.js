@@ -182,7 +182,6 @@ function displayPortfolioCoin(coin){
 						});
 						if(!isIn){
 							added.push(newCoin);
-							console.log("added");
 						}
 						removeAddPrompt($cancelButtonDiv.parent());
 						updatePortfolio();
@@ -197,7 +196,6 @@ function displayPortfolioCoin(coin){
 	var $deleteContainer = $("<div>").attr("class", "delete");
 	var $deleteButton = $("<input>").attr("type", "image").attr("src", "./images/del.png");
 	$deleteButton.click(function(){
-		console.log("delete clicked");
 		var $background = $("<div>").attr("class", "background");
 		$background.innerHeight(window.innerHeight);
 		$background.innerWidth(window.innerWidth);
@@ -206,7 +204,18 @@ function displayPortfolioCoin(coin){
 		var confirmDeleteString = "Are you sure you want to delete "+coin.name+" ("+coin.tag+")?";
 		var $confirmDeleteContainer = $("<div>").attr("class", "deleteQuestion").text(confirmDeleteString);
 		var $cancelDeleteButton = $("<input>").attr("id", "cancelDelete").attr("type", "button").val("No");
+		$cancelDeleteButton.click(function(){
+			removeAddPrompt($cancelDeleteButton.parent().parent());
+		});
 		var $confirmDeleteButton = $("<input>").attr("id", "confirmDelete").attr("type", "button").val("Yes");
+		$confirmDeleteButton.click(function(){
+			added.forEach(function(addedCoin){
+				if(addedCoin.tag==coin.tag)
+					added.splice(added.indexOf(addedCoin), 1);
+			});
+			removeAddPrompt($confirmDeleteButton.parent().parent());
+			updatePortfolio();
+		});
 		var $deleteForm = $("<form>").attr("id", "deleteForm");
 		$deleteForm.append($confirmDeleteContainer, $cancelDeleteButton, $confirmDeleteButton)
 		$deletePrompt.append($deleteForm);
@@ -225,7 +234,6 @@ function updatePortfolio(){
 		if($portfolioDiv.find("#portfolio").length>0){
 			var $portfolio = $("#portfolio");
 			$portfolio.empty();
-			
 		}
 			
 		else{
@@ -236,6 +244,11 @@ function updatePortfolio(){
 		added.forEach(function(coin){
 				displayPortfolioCoin(coin);
 		});
+	}
+	else{
+		$portfolioDiv.empty();
+		var $msg = $("<div>").attr("class", "msg").text("No coins in your portfolio");
+		$portfolioDiv.append($msg);
 	}
 }
 
