@@ -196,6 +196,22 @@ function displayPortfolioCoin(coin){
 	})
 	var $deleteContainer = $("<div>").attr("class", "delete");
 	var $deleteButton = $("<input>").attr("type", "image").attr("src", "./images/del.png");
+	$deleteButton.click(function(){
+		console.log("delete clicked");
+		var $background = $("<div>").attr("class", "background");
+		$background.innerHeight(window.innerHeight);
+		$background.innerWidth(window.innerWidth);
+		var $deletePrompt = $("<div>").attr("class", "deleteConfirm");
+		$deletePrompt.offset({top: (window.innerHeight/2)-100, left: (window.innerWidth/2)-250});
+		var confirmDeleteString = "Are you sure you want to delete "+coin.name+" ("+coin.tag+")?";
+		var $confirmDeleteContainer = $("<div>").attr("class", "deleteQuestion").text(confirmDeleteString);
+		var $cancelDeleteButton = $("<input>").attr("id", "cancelDelete").attr("type", "button").val("No");
+		var $confirmDeleteButton = $("<input>").attr("id", "confirmDelete").attr("type", "button").val("Yes");
+		var $deleteForm = $("<form>").attr("id", "deleteForm");
+		$deleteForm.append($confirmDeleteContainer, $cancelDeleteButton, $confirmDeleteButton)
+		$deletePrompt.append($deleteForm);
+		$main.append($background, $deletePrompt);
+	});
 	$deleteContainer.append($deleteButton);
 	$portfolioInfoContainer.append($nameContainer, $tagContainer, $amountContainer, $costContainer);
 	$portfolioLi.append($editButtonContainer, $portfolioInfoContainer, $deleteContainer);
