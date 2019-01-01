@@ -101,8 +101,10 @@ main, .portfolioContainer{
 
 
 .portfolioName, .portfolioTag{
-	display: inline;
+	display: inline-block;
 }
+
+
 
 p {
 	display: inline;
