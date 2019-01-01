@@ -194,8 +194,11 @@ function displayPortfolioCoin(coin){
 			}
 		})
 	})
+	var $deleteContainer = $("<div>").attr("class", "delete");
+	var $deleteButton = $("<input>").attr("type", "image").attr("src", "./images/del.png");
+	$deleteContainer.append($deleteButton);
 	$portfolioInfoContainer.append($nameContainer, $tagContainer, $amountContainer, $costContainer);
-	$portfolioLi.append($editButtonContainer, $portfolioInfoContainer);
+	$portfolioLi.append($editButtonContainer, $portfolioInfoContainer, $deleteContainer);
 	$("#portfolio").append($portfolioLi);
 
 }
