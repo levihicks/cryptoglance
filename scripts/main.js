@@ -118,7 +118,7 @@ function displayPortfolioCoin(coin){
 	var $nameContainer = $("<div>").text(coin.name).attr("class", "portfolioName");
 	var $tagContainer = $("<div>").text("("+coin.tag+")").attr("class", "portfolioTag");
 	var $amountContainer = $("<div>").text("Total Quantity: "+coin.quantity).attr("class", "portfolioQuantity");
-	var $costContainer = $("<div>").text("Total Initial Cost: "+(coin.cost*coin.quantity)).attr("class", "portfolioCost");
+	var $costContainer = $("<div>").text("Total Initial Cost: "+(coin.cost*coin.quantity).toFixed(8)).attr("class", "portfolioCost");
 	var $portfolioInfoContainer = $("<div>").attr("class", "portfolioInfo");
 	$editButton.click(function(){
 		added.forEach(function(addedCoin){
