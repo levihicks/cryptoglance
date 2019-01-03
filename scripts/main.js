@@ -3,8 +3,10 @@ var $searchButton = $("button[name=searchButton]");
 var $searchList = $(".searchResults ul");
 var $main = $("main");
 var $portfolioDiv = $(".portfolioContainer");
-var markets, query;
+var markets, query, marketSummaries;
+
 var marketsURL = 'https://cors.io/?https://www.bittrex.com/api/v1.1/public/getmarkets';
+var marketSummariesURL = 'https://cors.io/?https://bittrex.com/api/v1.1/public/getmarketsummaries';
 var added = [];
 $searchInput.keyup(function(event){
 	displayResults();
@@ -110,6 +112,19 @@ function displayAddForm($parent){
 
 }
 
+function getCurrentWorth(coin){
+	if(marketSummaries){
+		var result;
+		marketSummaries.forEach(function(marketCoin){
+			if(marketCoin.MarketName==coin.tag){
+				result = marketCoin.Last;
+				return;
+			}
+		});
+	}
+	return (result * coin.quantity).toFixed(8);
+}
+
 function displayPortfolioCoin(coin){
 	$portfolioLi = $("<li>");
 	var $editButtonContainer = $("<div>").attr("class", "editButton");
@@ -119,6 +134,9 @@ function displayPortfolioCoin(coin){
 	var $tagContainer = $("<div>").text("("+coin.tag+")").attr("class", "portfolioTag");
 	var $amountContainer = $("<div>").text("Total Quantity: "+coin.quantity).attr("class", "portfolioQuantity");
 	var $costContainer = $("<div>").text("Total Initial Cost: "+(coin.cost*coin.quantity).toFixed(8)).attr("class", "portfolioCost");
+	var currentWorth = getCurrentWorth(coin);
+	
+	var $currentWorthContainer = $("<div>").attr("class", "currentWorth").text("Total Current Worth: "+currentWorth);
 	var $portfolioInfoContainer = $("<div>").attr("class", "portfolioInfo");
 	$editButton.click(function(){
 		added.forEach(function(addedCoin){
@@ -222,7 +240,7 @@ function displayPortfolioCoin(coin){
 		$main.append($background, $deletePrompt);
 	});
 	$deleteContainer.append($deleteButton);
-	$portfolioInfoContainer.append($nameContainer, $tagContainer, $amountContainer, $costContainer);
+	$portfolioInfoContainer.append($nameContainer, $tagContainer, $amountContainer, $costContainer, $currentWorthContainer);
 	$portfolioLi.append($editButtonContainer, $portfolioInfoContainer, $deleteContainer);
 	$("#portfolio").append($portfolioLi);
 
@@ -294,6 +312,13 @@ var main = function(){
 	    if($searchInput != "")
 	    	displayResults();
 	  });
+	});
+	fetch(marketSummariesURL).then(function(response){
+		response.text().then(function(text){
+			marketSummaries = JSON.parse(text);
+			marketSummaries = marketSummaries.result;
+			console.log("market summaries loaded");
+		})
 	});
 };
 
