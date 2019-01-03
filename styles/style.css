@@ -1,3 +1,9 @@
+#deleteForm, .msg {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 html {
   height: 100%;
   background: whitesmoke;
@@ -50,9 +56,6 @@ main, .portfolioContainer {
 
 .msg {
   text-align: center;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
   font-style: italic;
 }
 
@@ -66,11 +69,14 @@ main, .portfolioContainer {
   width: 100%;
   border: none;
 }
-
+#portfolio li input {
+  background: inherit;
+  border: none;
+  color: lightgray;
+}
 #portfolio li:nth-child(1) {
   border-radius: 10px 10px 0 0;
 }
-
 #portfolio li:nth-child(odd) {
   background: gray;
   color: white;
@@ -80,15 +86,8 @@ main, .portfolioContainer {
   display: inline;
   vertical-align: 100%;
 }
-
 .editButton input {
   vertical-align: middle;
-}
-
-#portfolio li input {
-  background: inherit;
-  border: none;
-  color: lightgray;
 }
 
 .portfolioInfo {
@@ -115,13 +114,9 @@ main, .portfolioContainer {
 
 #deleteForm {
   margin: auto;
-  position: relative;
   height: 50%;
   width: 80%;
-  top: 50%;
-  transform: translateY(-50%);
 }
-
 #deleteForm input {
   position: relative;
   bottom: 0;
@@ -253,7 +248,6 @@ button[name=searchAdd] {
   margin-left: 5px;
   margin-top: 5px;
 }
-
 .cancelButtonContainer button {
   background: gray;
   border: 1px dashed darkred;
@@ -288,7 +282,6 @@ button[name=searchAdd] {
   bottom: 0;
   margin: 0 5px 5px 0;
 }
-
 .confirmAddContainer input {
   background: gray;
   border: 1px dashed lightgreen;

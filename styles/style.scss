@@ -16,6 +16,12 @@ $searchAddBackground: gray;
 $searchAddBorder: lightgreen;
 $promptBackground: rgba(10, 10, 10, 0.5);
 
+%verticalCenter {
+	position: relative;
+	top:50%;
+  	transform: translateY(-50%);
+}
+
 html {
 	height: 100%;
 	background:  $background;
@@ -67,47 +73,44 @@ main, .portfolioContainer{
 }
 
 .msg{
+	@extend %verticalCenter;
 	text-align: center;
-  	position:relative;
-  	top:50%;
-  	transform: translateY(-50%);
 	font-style: italic;
 }
 
-#portfolio li {
-  	background: $portfolioElEvenBackground;
-  	color: $portfolioElEvenColor;
-	margin: 0;
-	overflow: auto;
-	position: relative;
-	padding: 3px 0;
-	width: 100%;
-	border: none;
-}
+#portfolio {
+	li {
+	  	background: $portfolioElEvenBackground;
+	  	color: $portfolioElEvenColor;
+		margin: 0;
+		overflow: auto;
+		position: relative;
+		padding: 3px 0;
+		width: 100%;
+		border: none;
 
-#portfolio li:nth-child(1){
-	border-radius: 10px 10px 0 0;
-}
-
-#portfolio li:nth-child(odd){
-	background: $portfolioElOddBackground;
-	color: $portfolioElOddColor;
+		input{
+		 	background: inherit;
+			border: none;
+			color: lightgray;
+		}
+	}
+	li:nth-child(1){
+		border-radius: 10px 10px 0 0;
+	}
+	li:nth-child(odd){
+		background: $portfolioElOddBackground;
+		color: $portfolioElOddColor;
+	}
 }
 
 .editButton{
-  display: inline;
-  vertical-align: 100%;
-}
+	display: inline;
+	vertical-align: 100%;
 
-.editButton input{
-	vertical-align: middle;
-}
-
-#portfolio li input{
- 	background: inherit;
-	border: none;
-	color: lightgray;
-  
+	input{
+		vertical-align: middle;
+	}
 }
 
 .portfolioInfo{
@@ -133,17 +136,14 @@ main, .portfolioContainer{
 }
 
 #deleteForm {
+	@extend %verticalCenter;
 	margin: auto;
-  	position: relative;
 	height: 50%;
 	width: 80%;
-  	top:50%;
-  	transform: translateY(-50%);
-}
-
-#deleteForm input{
-	position: relative;
-	bottom: 0;
+  	input{
+		position: relative;
+		bottom: 0;
+	}
 }
 
 #cancelDelete, #confirmDelete {
@@ -162,11 +162,13 @@ main, .portfolioContainer{
 	background: green;
 }
 
-.delete input{
-	width: 20px;
-	height: 20px;
-	vertical-align: -140%;
-	margin-right: 5px;
+.delete {
+	input{
+		width: 20px;
+		height: 20px;
+		vertical-align: -140%;
+		margin-right: 5px;
+	}
 }
 
 p {
@@ -272,11 +274,12 @@ button[name=searchAdd]{
   	left: 0;
 	margin-left: 5px;
 	margin-top: 5px;
-}
-.cancelButtonContainer button{
-  	background: gray;
-	border: 1px dashed darkred;
-	color: darkred;
+
+	button{
+	  	background: gray;
+		border: 1px dashed darkred;
+		color: darkred;
+	}
 }
 
 .addNameContainer{
@@ -307,12 +310,12 @@ button[name=searchAdd]{
 	right: 0;
 	bottom: 0;
 	margin: 0 5px 5px 0;
-}
 
-.confirmAddContainer input{
-	background: gray;
-	border: 1px dashed lightgreen;
-	color: lightgreen;
+	input{
+		background: gray;
+		border: 1px dashed lightgreen;
+		color: lightgreen;
+	}
 }
 
 .addError{
