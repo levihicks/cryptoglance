@@ -253,12 +253,10 @@ function updatePortfolio(){
 			var $portfolio = $("#portfolio");
 			$portfolio.empty();
 		}
-			
 		else{
 			var $portfolio = $("<ul>").attr("id", "portfolio");
 			$portfolioDiv.append($portfolio);
 		}
-		
 		added.forEach(function(coin){
 				displayPortfolioCoin(coin);
 		});
