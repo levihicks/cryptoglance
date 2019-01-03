@@ -40,73 +40,100 @@ function checkInput(quantity, cost){
 	}	
 }
 
-function displayAddForm($parent){
+function promptBackground(){
 	var $background = $("<div>").attr("class", "background");
 	$background.innerHeight(window.innerHeight);
 	$background.innerWidth(window.innerWidth);
+	return $background;
+}
+
+function addPrompt(){
 	var $addPrompt = $("<div>").attr("class", "addPrompt");
 	$addPrompt.offset({top: (window.innerHeight/2)-100, left: (window.innerWidth/2)-250});
-	var coinName = $parent.find(".searchName").html();
-	var fullTag = $parent.find(".searchTag").html().slice(1, -1);
-	var tags = fullTag.split("-");
-	var baseTag = tags[0];
-	var coinTag = tags[1];
+	return $addPrompt;
+}
+
+function cancelButtonDiv(){
 	var $cancelButton = $("<button>").text("x").attr("name", "addCancel");
 	var $cancelButtonDiv = $("<div>").attr("class", "cancelButtonContainer");
 	$cancelButtonDiv.append($cancelButton);
 	$cancelButton.click(function(){
 		removeAddPrompt($cancelButtonDiv.parent());
 	});
-	$addPrompt.append($cancelButtonDiv);
-	var $addNameDiv = $("<div>").text(coinName).attr("class", "addNameContainer");
-	$addPrompt.append($addNameDiv);
-	var $addCoinForm = $("<form>").attr("class","addCoinForm");
-	$addCoinForm.attr("onsubmit","return false;");
+	return $cancelButtonDiv;
+}
+
+function addQuantityDiv(coinTag){
 	var $addQuantityDiv = $("<div>").attr("class", "addQuantityContainer");
 	var $addQuantityInput = $("<input>").attr("id", "addQuantity");
 	$addQuantityInput.attr("type", "text");
 	var $addQuantityLabel = $("<label>").attr("for", "addQuantity");
 	$addQuantityLabel.text("Quantity (" + coinTag + "): ");
-	$addQuantityDiv.append($addQuantityLabel);
-	$addQuantityDiv.append($addQuantityInput);
+	$addQuantityDiv.append($addQuantityLabel, $addQuantityInput);
+	return $addQuantityDiv;
+}
+
+function addCostDiv(baseTag){
 	var $addCostDiv = $("<div>").attr("class", "addCostContainer");
 	var $addCostInput = $("<input>").attr("id", "addCost");
 	$addCostInput.attr("type", "text");
 	var $addCostLabel = $("<label>").attr("for", "addCost");
 	$addCostLabel.text("Cost (" + baseTag + "): ");
-	$addCostDiv.append($addCostLabel);
-	$addCostDiv.append($addCostInput);
-	$addPrompt.append($addQuantityDiv);
-	$addPrompt.append($addCostDiv);
+	$addCostDiv.append($addCostLabel, $addCostInput);
+	return $addCostDiv;
+}
+
+function confirmAddClick(event){
+	var fullTag = event.data.fullTag;
+	var coinName = event.data.coinName;
+	var $cancelButtonDiv = event.data.$cancelButtonDiv;
+	var quantity = Number($("#addQuantity").val());
+	var cost = Number($("#addCost").val());
+	if(checkInput(quantity, cost)){
+		var tag = fullTag;
+		var newCoin = {name: coinName, tag: tag, quantity: quantity, cost: cost};
+		var isIn = false;
+		added.forEach (function (coin){
+			if (coin.tag == newCoin.tag){
+				coin.cost = ((coin.cost*coin.quantity)+(newCoin.cost*newCoin.quantity))/(newCoin.quantity+coin.quantity);
+				coin.quantity+=newCoin.quantity;
+				isIn = true;
+			}
+		});
+		if(!isIn){
+			added.push(newCoin);
+			console.log("added");
+		}
+		removeAddPrompt($cancelButtonDiv.parent());
+		updatePortfolio();
+	}
+}
+
+function confirmAddDiv(fullTag, coinName, $cancelButtonDiv){
 	var $confirmAddButton = $("<input>").attr("type", "button");
 	$confirmAddButton.attr("name", "confirmAddButton");
 	$confirmAddButton.attr("value", "+");
-	$confirmAddButton.attr("onclick", "");
+	$confirmAddButton.on("click", {fullTag: fullTag, coinName: coinName, $cancelButtonDiv: $cancelButtonDiv}, confirmAddClick);
 	var $confirmAddDiv = $("<div>").attr("class", "confirmAddContainer");
 	$confirmAddDiv.append($confirmAddButton);
-	$confirmAddButton.click(function(){
-		var quantity = Number($("#addQuantity").val());
-		var cost = Number($("#addCost").val());
-		if(checkInput(quantity, cost)){
-			var tag = fullTag;
-			var newCoin = {name: coinName, tag: tag, quantity: quantity, cost: cost};
-			var isIn = false;
-			added.forEach (function (coin){
-				if (coin.tag == newCoin.tag){
-					coin.cost = ((coin.cost*coin.quantity)+(newCoin.cost*newCoin.quantity))/(newCoin.quantity+coin.quantity);
-					coin.quantity+=newCoin.quantity;
-					isIn = true;
-				}
-			});
-			if(!isIn){
-				added.push(newCoin);
-				console.log("added");
-			}
-			removeAddPrompt($cancelButtonDiv.parent());
-			updatePortfolio();
-		}
-	});
-	$addPrompt.append($confirmAddDiv);
+	
+	return $confirmAddDiv;
+}
+
+function displayAddForm($parent){
+	var $background = promptBackground();
+	var $addPrompt = addPrompt();
+	var coinName = $parent.find(".searchName").html();
+	var fullTag = $parent.find(".searchTag").html().slice(1, -1);
+	var tags = fullTag.split("-");
+	var baseTag = tags[0];
+	var coinTag = tags[1];
+	var $cancelButtonDiv = cancelButtonDiv();
+	var $addNameDiv = $("<div>").text(coinName).attr("class", "addNameContainer");
+	var $addQuantityDiv = addQuantityDiv(coinTag);
+	var $addCostDiv = addCostDiv(baseTag);
+	var $confirmAddDiv = confirmAddDiv(fullTag, coinName, $cancelButtonDiv);
+	$addPrompt.append($cancelButtonDiv, $addNameDiv, $addQuantityDiv, $addCostDiv, $confirmAddDiv);
 	$main.append($background);
 	$main.append($addPrompt);
 
@@ -160,8 +187,6 @@ function displayPortfolioCoin(coin){
 				$addPrompt.append($cancelButtonDiv);
 				var $addNameDiv = $("<div>").text(coinName).attr("class", "addNameContainer");
 				$addPrompt.append($addNameDiv);
-				var $addCoinForm = $("<form>").attr("class","addCoinForm");
-				$addCoinForm.attr("onsubmit","return false;");
 				var $addQuantityDiv = $("<div>").attr("class", "addQuantityContainer");
 				var $addQuantityInput = $("<input>").attr("id", "addQuantity").attr("value", addedCoin.quantity);
 				$addQuantityInput.attr("type", "text");
@@ -263,10 +288,31 @@ function updatePortfolio(){
 	}
 	else{
 		$portfolioDiv.empty();
-		var $msg = $("<div>").attr("class", "msg").text("No coins in your portfolio");
+		var $msg = $("<div>").attr("class", "msg").text("No coins in your portfolio.");
 		$portfolioDiv.append($msg);
 	}
 }
+
+function searchTagDiv(market){
+	return $("<div>").text("("+market.MarketName+")").attr("class", "searchTag");
+}
+
+function searchNameDiv(market){
+	return $("<div>").text(market.MarketCurrencyLong).attr("class", "searchName");
+}
+
+function searchAddButton(){
+	$addButton = $("<button>").text("+").attr("name", "searchAdd");
+	$addButton.click(function(){
+		var $parent = $addButton.parent().parent();
+		displayAddForm($parent);
+	});
+	var $addButtonDiv = $("<div>").attr("class", "searchAddContainer");
+	$addButtonDiv.append($addButton);
+	return $addButtonDiv;
+}
+
+
 
 function displayResults(){
 	query = $searchInput.val();
@@ -277,21 +323,13 @@ function displayResults(){
 				|| market.MarketCurrency.toLowerCase().startsWith(query.toLowerCase()))
 				&& query!="")
 			{
-				var $tagDiv = $("<div>").text("("+market.MarketName+")").attr("class", "searchTag");
-				var $nameDiv = $("<div>").text(market.MarketCurrencyLong).attr("class", "searchName");
+				var $tagDiv = searchTagDiv(market);
+				var $nameDiv = searchNameDiv(market);
 				var $coinInfoDiv = $("<div>").attr("class", "coinInfo");
-				$coinInfoDiv.append($nameDiv);
-				$coinInfoDiv.append($tagDiv);
-				var $addButton = $("<button>").text("+").attr("name", "searchAdd");
-				$addButton.click(function(){
-					var $parent = $addButton.parent().parent();
-					displayAddForm($parent);
-				});
-				var $addButtonDiv = $("<div>").attr("class", "searchAddContainer");
-				$addButtonDiv.append($addButton);
+				$coinInfoDiv.append($nameDiv, $tagDiv);
+				var $addButtonDiv = searchAddButton();
 				var $searchEl = $("<li>");
-				$searchEl.append($addButtonDiv);
-				$searchEl.append($coinInfoDiv);
+				$searchEl.append($addButtonDiv, $coinInfoDiv);
 				$searchList.append($searchEl);
 			}
 		});
