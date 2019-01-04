@@ -265,8 +265,8 @@ function displayPortfolioCoin(coin){
 		$main.append($background, $deletePrompt);
 	});
 	$deleteContainer.append($deleteButton);
-	$portfolioInfoContainer.append($nameContainer, $tagContainer, $amountContainer, $costContainer, $currentWorthContainer);
-	$portfolioLi.append($editButtonContainer, $portfolioInfoContainer, $deleteContainer);
+	$portfolioInfoContainer.append($nameContainer, $tagContainer, $amountContainer, $costContainer);
+	$portfolioLi.append($editButtonContainer, $portfolioInfoContainer, $currentWorthContainer, $deleteContainer);
 	$("#portfolio").append($portfolioLi);
 
 }
@@ -302,8 +302,9 @@ function searchNameDiv(market){
 }
 
 function searchAddButton(){
-	$addButton = $("<button>").text("+").attr("name", "searchAdd");
-	$addButton.click(function(){
+	var $addButton = $("<button>").text("+").attr("name", "searchAdd");
+	
+	$addButton.on("click", function(){
 		var $parent = $addButton.parent().parent();
 		displayAddForm($parent);
 	});
