@@ -7,6 +7,7 @@ var markets, query, marketSummaries;
 var marketsURL = 'https://cors.io/?https://www.bittrex.com/api/v1.1/public/getmarkets';
 var marketSummariesURL = 'https://cors.io/?https://bittrex.com/api/v1.1/public/getmarketsummaries';
 var added = [];
+var loadingComplete = false;
 $searchInput.keyup(function(event){
 	displayResults();
 });
@@ -103,6 +104,7 @@ function confirmAddClick(event){
 			added.push(newCoin);
 			console.log("added");
 		}
+		updateLocal();
 		removeAddPrompt($cancelButtonDiv.parent());
 		updatePortfolio();
 	}
@@ -129,6 +131,7 @@ function confirmEditClick(event){
 			added.push(newCoin);
 			console.log("added");
 		}
+		updateLocal();
 		removeAddPrompt($cancelButtonDiv.parent());
 		updatePortfolio();
 	}
@@ -255,10 +258,18 @@ function confirmDeleteButton(coin){
 			if(addedCoin.tag==coin.tag)
 				added.splice(added.indexOf(addedCoin), 1);
 		});
+		updateLocal();
 		removeAddPrompt($confirmDeleteButton.parent().parent());
 		updatePortfolio();
 	});
 	return $confirmDeleteButton;
+}
+
+function updateLocal(){
+	if(added.length==0)
+		localStorage.removeItem("coins");
+	else
+		localStorage.setItem("coins", JSON.stringify(added));
 }
 
 function deleteButton(coin){
@@ -290,6 +301,12 @@ function displayPortfolioCoin(coin){
 	$("#portfolio").append($portfolioLi);
 }
 
+function portfolioMsg(msg){
+	$portfolioDiv.empty();
+	var $msg = $("<div>").attr("class", "msg").text(msg);
+	$portfolioDiv.append($msg);
+}
+
 function updatePortfolio(){
 	if (added.length != 0){
 		$(".msg").remove();
@@ -306,9 +323,7 @@ function updatePortfolio(){
 		});
 	}
 	else{
-		$portfolioDiv.empty();
-		var $msg = $("<div>").attr("class", "msg").text("No coins in your portfolio.");
-		$portfolioDiv.append($msg);
+		portfolioMsg("No coins in your portfolio.");
 	}
 }
 
@@ -356,7 +371,15 @@ function displayResults(){
 	}
 }
 
+function checkLocal(){
+	if(localStorage.getItem("coins"))
+		added = JSON.parse(localStorage.getItem("coins"));
+	var msg = (added > 0)?"Loading...":"No coins in your portfolio.";
+	portfolioMsg(msg);
+}
+
 var main = function(){
+	checkLocal();
 	$searchInput.val("");
 	fetch(marketsURL).then(function(response) {
 	  	response.text().then(function(text) {
@@ -370,7 +393,8 @@ var main = function(){
 		response.text().then(function(text){
 			marketSummaries = JSON.parse(text);
 			marketSummaries = marketSummaries.result;
-			console.log("market summaries loaded");
+			loadingComplete = true;
+			updatePortfolio();
 		})
 	});
 };
