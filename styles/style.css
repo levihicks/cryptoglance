@@ -46,8 +46,8 @@ main, .portfolioContainer {
 .portfolioContainer {
   display: inline-block;
   border-radius: 10px;
-  background: black;
-  color: white;
+  background: white;
+  color: black;
   width: 70%;
   max-width: 900px;
   min-width: 500px;
@@ -60,7 +60,7 @@ main, .portfolioContainer {
 }
 
 #portfolio li {
-  background: white;
+  background: #e6e6e6;
   color: black;
   margin: 0;
   overflow: auto;
@@ -72,13 +72,13 @@ main, .portfolioContainer {
 #portfolio li input {
   background: inherit;
   border: none;
-  color: lightgray;
+  color: black;
 }
 #portfolio li:nth-child(1) {
   border-radius: 10px 10px 0 0;
 }
 #portfolio li:nth-child(odd) {
-  background: gray;
+  background: #a6a6a6;
   color: white;
 }
 
@@ -163,7 +163,7 @@ p {
   max-width: 385px;
   min-width: 200px;
   border-radius: 10px;
-  background: gray;
+  background: white;
   overflow: auto;
 }
 
@@ -176,7 +176,7 @@ p {
 
 #searchInput {
   width: 80%;
-  background: darkgray;
+  background: #f2f2f2;
   font-family: "ubuntu", sans-serif;
   padding-left: 5px;
 }
@@ -191,7 +191,7 @@ li {
   list-style: none;
   border-bottom: solid 1px black;
   padding: 15px 0;
-  color: whitesmoke;
+  color: black;
   width: 90%;
   text-align: left;
   margin: 0 auto;
@@ -210,8 +210,8 @@ button[name=searchAdd] {
   height: 20px;
   width: 20px;
   padding: 0;
-  background: gray;
-  color: white;
+  background: #e6ffe6;
+  color: #0a290a;
   font-size: 15px;
   font-weight: bold;
   border: 1px solid lightgreen;
@@ -241,7 +241,8 @@ button[name=searchAdd] {
   position: fixed;
   height: 200px;
   width: 500px;
-  background: gray;
+  background: #333333;
+  color: white;
 }
 
 .cancelButtonContainer {
@@ -254,9 +255,11 @@ button[name=searchAdd] {
   margin-top: 5px;
 }
 .cancelButtonContainer button {
-  background: gray;
-  border: 1px dashed darkred;
-  color: darkred;
+  background: red;
+  padding-bottom: 2px;
+  border: 1px solid white;
+  border-radius: 10px;
+  color: white;
 }
 
 .addNameContainer {
@@ -288,9 +291,10 @@ button[name=searchAdd] {
   margin: 0 5px 5px 0;
 }
 .confirmAddContainer input {
-  background: gray;
-  border: 1px dashed lightgreen;
-  color: lightgreen;
+  background: green;
+  border: 1px solid white;
+  border-radius: 10px;
+  color: white;
 }
 
 .addError {

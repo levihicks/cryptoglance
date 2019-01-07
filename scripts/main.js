@@ -374,7 +374,7 @@ function displayResults(){
 function checkLocal(){
 	if(localStorage.getItem("coins"))
 		added = JSON.parse(localStorage.getItem("coins"));
-	var msg = (added > 0)?"Loading...":"No coins in your portfolio.";
+	var msg = (added.length > 0)?"Loading...":"No coins in your portfolio.";
 	portfolioMsg(msg);
 }
 

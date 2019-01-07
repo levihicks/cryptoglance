@@ -1,20 +1,21 @@
 $ubuntuFont: 'ubuntu', sans-serif;
 $background: whitesmoke;
 $headerColor: #1a1a1a;
-$portfolioBackground: black;
-$portfolioColor: white;
-$portfolioElEvenBackground: white;
+$portfolioBackground: white;
+$portfolioColor: black;
+$portfolioElEvenBackground:   #e6e6e6;
 $portfolioElEvenColor: black;
-$portfolioElOddBackground: gray;
+$portfolioElOddBackground:  #a6a6a6;
 $portfolioElOddColor: white;
-$searchBackground: gray;
-$searchInputBackground: darkgray;
+$searchBackground: white;
+$searchInputBackground: #f2f2f2;
 $listElFont: monospace;
-$elColor: whitesmoke;
-$searchAddColor: white;
-$searchAddBackground: gray;
+$elColor: black;
+$searchAddColor:  #0a290a;
+$searchAddBackground:  #e6ffe6;
 $searchAddBorder: lightgreen;
 $promptBackground: rgba(10, 10, 10, 0.5);
+$addPromptBackground:  #333333;
 
 %verticalCenter {
 	position: relative;
@@ -92,7 +93,7 @@ main, .portfolioContainer{
 		input{
 		 	background: inherit;
 			border: none;
-			color: lightgray;
+			color: black;
 		}
 	}
 	li:nth-child(1){
@@ -268,7 +269,8 @@ button[name=searchAdd]{
 	position: fixed;
 	height: 200px;
 	width: 500px;
-	background: gray;
+	background: $addPromptBackground;
+	color: white;
 }
 
 .cancelButtonContainer{
@@ -281,9 +283,11 @@ button[name=searchAdd]{
 	margin-top: 5px;
 
 	button{
-	  	background: gray;
-		border: 1px dashed darkred;
-		color: darkred;
+	  	background: red;
+		padding-bottom: 2px;
+		border: 1px solid white;
+		border-radius: 10px;
+		color: white;
 	}
 }
 
@@ -317,9 +321,10 @@ button[name=searchAdd]{
 	margin: 0 5px 5px 0;
 
 	input{
-		background: gray;
-		border: 1px dashed lightgreen;
-		color: lightgreen;
+		background: green;
+		border: 1px solid white;
+		border-radius: 10px;
+		color: white;
 	}
 }
 
