@@ -111,10 +111,12 @@ main, .portfolioContainer {
 }
 
 .deleteConfirm {
+  color: white;
+  border-radius: 10px;
   position: fixed;
   height: 200px;
   width: 500px;
-  background: gray;
+  background: #333333;
 }
 
 #deleteForm {
@@ -211,7 +213,7 @@ button[name=searchAdd] {
   width: 20px;
   padding: 0;
   background: #e6ffe6;
-  color: #0a290a;
+  color: darkgray;
   font-size: 15px;
   font-weight: bold;
   border: 1px solid lightgreen;
@@ -238,6 +240,7 @@ button[name=searchAdd] {
 }
 
 .addPrompt {
+  border-radius: 10px;
   position: fixed;
   height: 200px;
   width: 500px;

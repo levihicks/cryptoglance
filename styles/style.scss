@@ -11,7 +11,7 @@ $searchBackground: white;
 $searchInputBackground: #f2f2f2;
 $listElFont: monospace;
 $elColor: black;
-$searchAddColor:  #0a290a;
+$searchAddColor:  darkgray;
 $searchAddBackground:  #e6ffe6;
 $searchAddBorder: lightgreen;
 $promptBackground: rgba(10, 10, 10, 0.5);
@@ -135,10 +135,12 @@ main, .portfolioContainer{
 }
 
 .deleteConfirm{
+	color: white;
+	border-radius: 10px;
 	position: fixed;
 	height: 200px;
 	width: 500px;
-	background: gray;
+	background: $addPromptBackground;
 }
 
 #deleteForm {
@@ -266,6 +268,7 @@ button[name=searchAdd]{
 }
 
 .addPrompt{
+	border-radius: 10px;
 	position: fixed;
 	height: 200px;
 	width: 500px;
