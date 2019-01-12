@@ -1,4 +1,4 @@
-#deleteForm, .msg {
+.delete, #deleteForm, .msg {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
@@ -31,7 +31,7 @@ h1 {
 
 main {
   width: 100%;
-  min-width: 800px;
+  min-width: 850px;
   height: 93%;
 }
 
@@ -63,11 +63,12 @@ main, .portfolioContainer {
   background: #e6e6e6;
   color: black;
   margin: 0;
-  overflow: auto;
+  overflow: visible;
   position: relative;
   padding: 3px 0;
   width: 100%;
   border: none;
+  max-height: 50px;
 }
 #portfolio li input {
   background: inherit;
@@ -83,16 +84,14 @@ main, .portfolioContainer {
 }
 
 .editButton {
-  display: inline;
-  vertical-align: 100%;
-}
-.editButton input {
-  vertical-align: middle;
+  display: inline-block;
+  position: relative;
+  top: 50%;
+  transform: translateY(-70%);
 }
 
 .portfolioInfo {
   display: inline-block;
-  margin-left: 5%;
 }
 
 .portfolioName, .portfolioTag {
@@ -102,12 +101,6 @@ main, .portfolioContainer {
 .currentWorth {
   display: inline-block;
   vertical-align: top;
-}
-
-.delete {
-  position: relative;
-  display: inline-block;
-  float: right;
 }
 
 .deleteConfirm {
@@ -145,10 +138,13 @@ main, .portfolioContainer {
   background: green;
 }
 
+.delete {
+  position: absolute;
+  right: 0;
+}
 .delete input {
   width: 20px;
   height: 20px;
-  vertical-align: -140%;
   margin-right: 5px;
 }
 

@@ -50,7 +50,7 @@ h1{
 
 main{
 	width: 100%;
-  	min-width: 800px;
+  	min-width: 850px;
 	height: 93%;
 }
 
@@ -84,11 +84,12 @@ main, .portfolioContainer{
 	  	background: $portfolioElEvenBackground;
 	  	color: $portfolioElEvenColor;
 		margin: 0;
-		overflow: auto;
+		overflow: visible;
 		position: relative;
 		padding: 3px 0;
 		width: 100%;
 		border: none;
+    max-height: 50px;
 
 		input{
 		 	background: inherit;
@@ -106,17 +107,14 @@ main, .portfolioContainer{
 }
 
 .editButton{
-	display: inline;
-	vertical-align: 100%;
-
-	input{
-		vertical-align: middle;
-	}
+	display: inline-block;
+	position: relative;
+	top: 50%;
+	transform: translateY(-70%);
 }
 
 .portfolioInfo{
   	display: inline-block;
-	margin-left: 5%;
 }
 
 .portfolioName, .portfolioTag{
@@ -126,12 +124,6 @@ main, .portfolioContainer{
 .currentWorth{
 	display: inline-block;
 	vertical-align: top;
-}
-
-.delete {
-  	position: relative;
-  	display: inline-block;
-	float: right;
 }
 
 .deleteConfirm{
@@ -148,7 +140,7 @@ main, .portfolioContainer{
 	margin: auto;
 	height: 50%;
 	width: 80%;
-  	input{
+  input{
 		position: relative;
 		bottom: 0;
 	}
@@ -171,10 +163,12 @@ main, .portfolioContainer{
 }
 
 .delete {
+	position: absolute;
+	right: 0;
+	@extend %verticalCenter;
 	input{
 		width: 20px;
 		height: 20px;
-		vertical-align: -140%;
 		margin-right: 5px;
 	}
 }
@@ -185,7 +179,7 @@ p {
 
 .search{
 	display: inline-block;
-  	height: 100%;
+  height: 100%;
 	min-height: 300px;
 	max-height: 900px;
 	width: 25%;
@@ -237,17 +231,17 @@ li:first-child{
 }
 
 button[name=searchAdd]{
-  	height: 20px;
+  height: 20px;
 	width: 20px;
 	padding: 0;
 	background:  $searchAddBackground;
 	color: $searchAddColor;
 	font-size: 15px;
-  	font-weight: bold;
+  font-weight: bold;
 	border: 1px solid $searchAddBorder;
 	border-radius: 5px;
 	margin-right: 2px;
-  	vertical-align: middle;
+  vertical-align: middle;
 	display: inline-block;
 }
 
@@ -281,12 +275,11 @@ button[name=searchAdd]{
 	display: inline;
 	margin: 0;
 	position: absolute;
-  	left: 0;
+  left: 0;
 	margin-left: 5px;
 	margin-top: 5px;
-
 	button{
-	  	background: red;
+	  background: red;
 		padding-bottom: 2px;
 		border: 1px solid white;
 		border-radius: 10px;
@@ -300,7 +293,7 @@ button[name=searchAdd]{
 
 .addQuantityContainer, .addCostContainer{
 	margin: 0 auto;
-  	width: 75%;
+  width: 75%;
 	display: block;
 	height: 10%;
 	margin-top: 25px;
@@ -309,7 +302,6 @@ button[name=searchAdd]{
 .addQuantityContainer label,
 .addCostContainer label{
 	float: left;
-	
 }
 
 .addQuantityContainer input,
@@ -322,7 +314,6 @@ button[name=searchAdd]{
 	right: 0;
 	bottom: 0;
 	margin: 0 5px 5px 0;
-
 	input{
 		background: green;
 		border: 1px solid white;
