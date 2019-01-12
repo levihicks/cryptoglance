@@ -117,6 +117,15 @@ main, .portfolioContainer{
   	display: inline-block;
 }
 
+.portfolioChange{
+	display: inline-block;
+
+  font-size: 1.25em;
+	position: absolute;
+	right: 30px;
+	@extend %verticalCenter;
+}
+
 .portfolioName, .portfolioTag{
 	display: inline-block;
 }

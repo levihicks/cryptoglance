@@ -286,6 +286,16 @@ function deleteButton(coin){
 	return $deleteContainer;
 }
 
+function priceChange(coin){
+	var change = ((getCurrentWorth(coin)/(coin.cost*coin.quantity)) * 100)-100;
+	change=change.toFixed(3);
+	var indicator = (change>=0)?"▲ ":"▼ ";
+	var $changeContainer = $("<div>").attr("class","portfolioChange").text(indicator+change+"%");
+	var color = (change>=0)?"green":"red";
+	$changeContainer.attr("style", "color: "+color+";");
+	return $changeContainer;
+}
+
 function displayPortfolioCoin(coin){
 	$portfolioLi = $("<li>");
 	var $editButtonContainer = editButtonDiv(coin);
@@ -294,10 +304,12 @@ function displayPortfolioCoin(coin){
 	var $amountContainer = portfolioQuantity(coin.quantity);
 	var $costContainer = portfolioCost(coin.cost*coin.quantity);
 	var $currentWorthContainer = current(coin);
+	var $changeContainer = priceChange(coin);
 	var $portfolioInfoContainer = $("<div>").attr("class", "portfolioInfo");
 	var $deleteContainer = deleteButton(coin);
 	$portfolioInfoContainer.append($nameContainer, $tagContainer, $amountContainer, $costContainer);
-	$portfolioLi.append($editButtonContainer, $portfolioInfoContainer, $currentWorthContainer, $deleteContainer);
+	$portfolioLi.append($editButtonContainer, $portfolioInfoContainer, $currentWorthContainer,
+						$changeContainer, $deleteContainer);
 	$("#portfolio").append($portfolioLi);
 }
 

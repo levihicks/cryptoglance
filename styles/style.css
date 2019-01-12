@@ -1,4 +1,4 @@
-.delete, #deleteForm, .msg {
+.delete, #deleteForm, .portfolioChange, .msg {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
@@ -92,6 +92,13 @@ main, .portfolioContainer {
 
 .portfolioInfo {
   display: inline-block;
+}
+
+.portfolioChange {
+  display: inline-block;
+  font-size: 1.25em;
+  position: absolute;
+  right: 30px;
 }
 
 .portfolioName, .portfolioTag {
