@@ -50,7 +50,7 @@ h1{
 
 main{
 	width: 100%;
-  	min-width: 850px;
+  	min-width: 970px;
 	height: 93%;
 }
 
@@ -89,7 +89,7 @@ main, .portfolioContainer{
 		padding: 3px 0;
 		width: 100%;
 		border: none;
-    max-height: 50px;
+    max-height: 70px;
 
 		input{
 		 	background: inherit;
@@ -130,9 +130,13 @@ main, .portfolioContainer{
 	display: inline-block;
 }
 
-.currentWorth{
+.current{
 	display: inline-block;
-	vertical-align: top;
+	margin-left: 5px;
+}
+
+.currentPrice, .currentWorth{
+	display: block;
 }
 
 .deleteConfirm{

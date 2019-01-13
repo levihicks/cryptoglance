@@ -172,7 +172,7 @@ function displayAddForm($parent){
 	$main.append(promptBackground(), $addPrompt);
 }
 
-function getCurrentWorth(coin){
+function getCurrentPrice(coin){
 	if(marketSummaries){
 		var result;
 		marketSummaries.forEach(function(marketCoin){
@@ -182,7 +182,11 @@ function getCurrentWorth(coin){
 			}
 		});
 	}
-	return (result * coin.quantity).toFixed(8);
+	return result;
+}
+
+function getCurrentWorth(coin){
+	return (getCurrentPrice(coin) * coin.quantity).toFixed(8);
 }
 
 function editButtonDiv(coin){
@@ -225,7 +229,14 @@ function portfolioCost(cost){
 	return $("<div>").text("Total Initial Cost: "+cost.toFixed(8)).attr("class", "portfolioCost");
 }
 
-function current(coin){
+function currentPrice(coin){
+	var currentPrice = getCurrentPrice(coin);
+	var $currentPriceContainer = $("<div>").attr("class", "currentPrice").text("Current Price: "+currentPrice);
+	return $currentPriceContainer;
+}
+
+
+function currentWorth(coin){
 	var currentWorth = getCurrentWorth(coin);
 	var $currentWorthContainer = $("<div>").attr("class", "currentWorth").text("Total Current Worth: "+currentWorth);
 	return $currentWorthContainer;
@@ -296,6 +307,14 @@ function priceChange(coin){
 	return $changeContainer;
 }
 
+function currentInfo(coin){
+	var $currentWorthContainer = currentWorth(coin);
+	var $currentPriceContainer = currentPrice(coin);
+	var $currentInfoContainer = $("<div>").attr("class", "current");
+	$currentInfoContainer.append($currentWorthContainer, $currentPriceContainer);
+	return $currentInfoContainer;
+}
+
 function displayPortfolioCoin(coin){
 	$portfolioLi = $("<li>");
 	var $editButtonContainer = editButtonDiv(coin);
@@ -303,12 +322,12 @@ function displayPortfolioCoin(coin){
 	var $tagContainer = portfolioTag(coin.tag);
 	var $amountContainer = portfolioQuantity(coin.quantity);
 	var $costContainer = portfolioCost(coin.cost*coin.quantity);
-	var $currentWorthContainer = current(coin);
+	var $currentInfoContainer = currentInfo(coin);
 	var $changeContainer = priceChange(coin);
 	var $portfolioInfoContainer = $("<div>").attr("class", "portfolioInfo");
 	var $deleteContainer = deleteButton(coin);
 	$portfolioInfoContainer.append($nameContainer, $tagContainer, $amountContainer, $costContainer);
-	$portfolioLi.append($editButtonContainer, $portfolioInfoContainer, $currentWorthContainer,
+	$portfolioLi.append($editButtonContainer, $portfolioInfoContainer, $currentInfoContainer,
 						$changeContainer, $deleteContainer);
 	$("#portfolio").append($portfolioLi);
 }
