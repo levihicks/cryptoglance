@@ -6,8 +6,8 @@
 
 html {
   height: 100%;
-  background: whitesmoke;
-  color: #1a1a1a;
+  background: #cce6ff;
+  color: #404040;
 }
 
 body {
@@ -23,8 +23,8 @@ h1, .portfolioContainer {
 }
 
 h1 {
-  border-bottom: 2px solid red;
-  border-top: 2px solid green;
+  border-bottom: 2px solid #ff6666;
+  border-top: 2px solid #9fdf9f;
   width: 200px;
   margin: 10px auto;
 }
@@ -87,7 +87,7 @@ main, .portfolioContainer {
   display: inline-block;
   position: relative;
   top: 50%;
-  transform: translateY(-70%);
+  transform: translateY(-100%);
 }
 
 .portfolioInfo {
@@ -103,6 +103,11 @@ main, .portfolioContainer {
 
 .portfolioName, .portfolioTag {
   display: inline-block;
+}
+
+.portfolioTag {
+  margin-left: 3px;
+  font-style: italic;
 }
 
 .current {
@@ -196,7 +201,8 @@ ul {
 }
 
 li {
-  font-family: monospace;
+  font-family: "ubuntu", sans-serif;
+  font-size: 0.8em;
   list-style: none;
   border-bottom: solid 1px black;
   padding: 15px 0;
@@ -204,6 +210,10 @@ li {
   width: 90%;
   text-align: left;
   margin: 0 auto;
+}
+
+.portfolioName {
+  font-size: 1.25em;
 }
 
 li:first-child {

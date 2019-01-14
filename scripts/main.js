@@ -11,7 +11,7 @@ var loadingComplete = false;
 $searchInput.keyup(function(event){
 	displayResults();
 });
-var re = /(^[\d]*[\.]?[\d]+$)|(^[\d]+[\.]$)/;
+var re = /^([\d]*[\.]?[\d]+)|([\d]+[\.])$/;
 
 function removeAddPrompt($parent){
 	$parent.prev().remove();
@@ -182,7 +182,7 @@ function getCurrentPrice(coin){
 			}
 		});
 	}
-	return result;
+	return result.toFixed(8);
 }
 
 function getCurrentWorth(coin){
