@@ -2,6 +2,7 @@ var $searchInput = $("#searchInput");
 var $searchButton = $("button[name=searchButton]");
 var $searchList = $(".searchResults ul");
 var $main = $("main");
+var $header=$("header");
 var $portfolioDiv = $(".portfolioContainer");
 var markets, query, marketSummaries;
 var marketsURL = 'https://cors.io/?https://www.bittrex.com/api/v1.1/public/getmarkets';
@@ -409,9 +410,17 @@ function checkLocal(){
 	portfolioMsg(msg);
 }
 
+function createTicker(){
+	var $ticker = $("<canvas>").attr("style", "background: black;");
+	$ticker.width(window.innerWidth);
+	$ticker.height(20);
+	$header.prepend($ticker);
+}
+
 var main = function(){
 	checkLocal();
 	$searchInput.val("");
+	createTicker();
 	fetch(marketsURL).then(function(response) {
 	  	response.text().then(function(text) {
 	    markets = JSON.parse(text);
