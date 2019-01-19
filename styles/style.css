@@ -1,4 +1,4 @@
-.delete, #deleteForm, .portfolioChange, .msg {
+.delete, #deleteForm, .portfolioChange, .allCoinInfo, .coinImage, .editButton, .msg {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
@@ -69,6 +69,7 @@ main, .portfolioContainer {
   width: 100%;
   border: none;
   max-height: 70px;
+  min-height: 50px;
 }
 #portfolio li input {
   background: inherit;
@@ -85,9 +86,19 @@ main, .portfolioContainer {
 
 .editButton {
   display: inline-block;
-  position: relative;
-  top: 50%;
-  transform: translateY(-100%);
+  position: absolute;
+}
+
+.coinImage {
+  display: inline-block;
+  margin-right: 5px;
+  position: absolute;
+  left: 50px;
+}
+
+.allCoinInfo {
+  position: absolute;
+  left: 90px;
 }
 
 .portfolioInfo {

@@ -90,7 +90,7 @@ main, .portfolioContainer{
 		width: 100%;
 		border: none;
     max-height: 70px;
-
+    min-height: 50px;
 		input{
 		 	background: inherit;
 			border: none;
@@ -108,13 +108,29 @@ main, .portfolioContainer{
 
 .editButton{
 	display: inline-block;
-	position: relative;
-	top: 50%;
-	transform: translateY(-100%);
+  position: absolute;
+	@extend %verticalCenter;
+}
+
+.coinImage {
+	display: inline-block;
+	margin-right: 5px;
+	position: absolute;
+	left: 50px;
+		@extend %verticalCenter;
+
+	
+}
+
+.allCoinInfo{
+	position: absolute;
+	left: 90px;
+	@extend %verticalCenter;
 }
 
 .portfolioInfo{
   	display: inline-block;
+	
 }
 
 .portfolioChange{

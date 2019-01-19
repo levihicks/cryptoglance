@@ -319,6 +319,7 @@ function currentInfo(coin){
 function displayPortfolioCoin(coin){
 	$portfolioLi = $("<li>");
 	var $editButtonContainer = editButtonDiv(coin);
+	var $coinImageContainer = coinImage(coin);
 	var $nameContainer = portfolioName(coin.name);
 	var $tagContainer = portfolioTag(coin.tag);
 	var $amountContainer = portfolioQuantity(coin.quantity);
@@ -327,9 +328,11 @@ function displayPortfolioCoin(coin){
 	var $changeContainer = priceChange(coin);
 	var $portfolioInfoContainer = $("<div>").attr("class", "portfolioInfo");
 	var $deleteContainer = deleteButton(coin);
+	var $allCoinInfo = $("<div>").attr("class", "allCoinInfo");
 	$portfolioInfoContainer.append($nameContainer, $tagContainer, $amountContainer, $costContainer);
-	$portfolioLi.append($editButtonContainer, $portfolioInfoContainer, $currentInfoContainer,
-						$changeContainer, $deleteContainer);
+	$allCoinInfo.append($portfolioInfoContainer, $currentInfoContainer);
+	$portfolioLi.append($editButtonContainer, $coinImageContainer, $allCoinInfo,
+					    $changeContainer, $deleteContainer);
 	$("#portfolio").append($portfolioLi);
 }
 
@@ -417,6 +420,23 @@ function createTicker(){
 	$header.prepend($ticker);
 }
 
+function coinImage(coin){
+	var imgURL;
+	for(var i = 0; i < markets.length; i++){
+		var market = markets[i];
+		if(market.MarketName==coin.tag){
+			imgURL = market.LogoUrl;
+			break;
+		}
+	}
+	var $coinImageContainer = $("<div>").attr("class", "coinImage");
+	var $coinImage = $("<img>").attr("src", imgURL);
+	 $coinImage.height(30);
+	 $coinImage.width(30);
+	$coinImageContainer.append($coinImage);
+	return $coinImageContainer;
+}
+
 var main = function(){
 	checkLocal();
 	$searchInput.val("");
@@ -425,16 +445,24 @@ var main = function(){
 	  	response.text().then(function(text) {
 	    markets = JSON.parse(text);
 	    markets = markets.result;
-	    if($searchInput != "")
+	    if($searchInput != "")   	
 	    	displayResults();
+	    if(marketSummaries){
+	    	loadingComplete = true;
+			updatePortfolio();
+		}
+	    
 	  });
 	});
 	fetch(marketSummariesURL).then(function(response){
 		response.text().then(function(text){
 			marketSummaries = JSON.parse(text);
 			marketSummaries = marketSummaries.result;
-			loadingComplete = true;
-			updatePortfolio();
+			if(markets){
+				loadingComplete = true;
+		    	updatePortfolio();
+			}
+			
 		})
 	});
 };
