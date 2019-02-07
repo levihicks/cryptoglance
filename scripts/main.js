@@ -191,7 +191,7 @@ function getCurrentWorth(coin){
 }
 
 function editButtonDiv(coin){
-	var $editButtonContainer = $("<div>").attr("class", "editButton");
+	var $editButtonContainer = $("<td>").attr("class", "editButton");
 	var $editButton = $("<input>").attr("value", "[Edit]").attr("type", "button");
 	$editButton.click(function(){
 		added.forEach(function(addedCoin){
@@ -285,7 +285,7 @@ function updateLocal(){
 }
 
 function deleteButton(coin){
-	var $deleteContainer = $("<div>").attr("class", "delete");
+	var $deleteContainer = $("<td>").attr("class", "delete");
 	var $deleteButton = $("<input>").attr("type", "image").attr("src", "./images/del.png");
 	$deleteButton.click(function(){
 		var $deletePrompt = deletePrompt();
@@ -302,7 +302,7 @@ function priceChange(coin){
 	var change = ((getCurrentWorth(coin)/(coin.cost*coin.quantity)) * 100)-100;
 	change=change.toFixed(3);
 	var indicator = (change>=0)?"▲ ":"▼ ";
-	var $changeContainer = $("<div>").attr("class","portfolioChange").text(indicator+change+"%");
+	var $changeContainer = $("<td>").attr("class","portfolioChange").text(indicator+change+"%");
 	var color = (change>=0)?"green":"red";
 	$changeContainer.attr("style", "color: "+color+";");
 	return $changeContainer;
@@ -317,7 +317,7 @@ function currentInfo(coin){
 }
 
 function displayPortfolioCoin(coin){
-	$portfolioLi = $("<li>");
+	$portfolioLi = $("<tr>");
 	var $editButtonContainer = editButtonDiv(coin);
 	var $coinImageContainer = coinImage(coin);
 	var $nameContainer = portfolioName(coin.name);
@@ -328,7 +328,7 @@ function displayPortfolioCoin(coin){
 	var $changeContainer = priceChange(coin);
 	var $portfolioInfoContainer = $("<div>").attr("class", "portfolioInfo");
 	var $deleteContainer = deleteButton(coin);
-	var $allCoinInfo = $("<div>").attr("class", "allCoinInfo");
+	var $allCoinInfo = $("<td>").attr("class", "allCoinInfo");
 	$portfolioInfoContainer.append($nameContainer, $tagContainer, $amountContainer, $costContainer);
 	$allCoinInfo.append($portfolioInfoContainer, $currentInfoContainer);
 	$portfolioLi.append($editButtonContainer, $coinImageContainer, $allCoinInfo,
@@ -350,7 +350,7 @@ function updatePortfolio(){
 			$portfolio.empty();
 		}
 		else{
-			var $portfolio = $("<ul>").attr("id", "portfolio");
+			var $portfolio = $("<table>").attr("id", "portfolio");
 			$portfolioDiv.append($portfolio);
 		}
 		added.forEach(function(coin){
@@ -429,7 +429,7 @@ function coinImage(coin){
 			break;
 		}
 	}
-	var $coinImageContainer = $("<div>").attr("class", "coinImage");
+	var $coinImageContainer = $("<td>").attr("class", "coinImage");
 	var $coinImage = $("<img>").attr("src", imgURL);
 	 $coinImage.height(30);
 	 $coinImage.width(30);

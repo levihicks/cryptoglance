@@ -1,4 +1,4 @@
-.delete, #deleteForm, .portfolioChange, .allCoinInfo, .coinImage, .editButton, .msg {
+#deleteForm, .msg {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
@@ -59,7 +59,13 @@ main, .portfolioContainer {
   font-style: italic;
 }
 
-#portfolio li {
+#portfolio {
+  display: table;
+  width: 100%;
+  max-height: 100%;
+}
+#portfolio tr {
+  display: table-row;
   background: #e6e6e6;
   color: black;
   margin: 0;
@@ -68,37 +74,31 @@ main, .portfolioContainer {
   padding: 3px 0;
   width: 100%;
   border: none;
-  max-height: 70px;
-  min-height: 50px;
+  height: 70px;
 }
-#portfolio li input {
+#portfolio tr input {
   background: inherit;
   border: none;
   color: black;
 }
-#portfolio li:nth-child(1) {
+#portfolio tr td {
+  display: table-cell;
+}
+#portfolio tr:nth-child(1) {
   border-radius: 10px 10px 0 0;
 }
-#portfolio li:nth-child(odd) {
+#portfolio tr:nth-child(odd) {
   background: #a6a6a6;
   color: white;
 }
 
 .editButton {
   display: inline-block;
-  position: absolute;
 }
 
 .coinImage {
   display: inline-block;
   margin-right: 5px;
-  position: absolute;
-  left: 50px;
-}
-
-.allCoinInfo {
-  position: absolute;
-  left: 90px;
 }
 
 .portfolioInfo {
@@ -108,8 +108,6 @@ main, .portfolioContainer {
 .portfolioChange {
   display: inline-block;
   font-size: 1.25em;
-  position: absolute;
-  right: 30px;
 }
 
 .portfolioName, .portfolioTag {
@@ -165,10 +163,6 @@ main, .portfolioContainer {
   background: green;
 }
 
-.delete {
-  position: absolute;
-  right: 0;
-}
 .delete input {
   width: 20px;
   height: 20px;

@@ -80,27 +80,33 @@ main, .portfolioContainer{
 }
 
 #portfolio {
-	li {
-	  	background: $portfolioElEvenBackground;
-	  	color: $portfolioElEvenColor;
+	display: table;
+	width: 100%;
+	max-height: 100%;
+	tr {
+		display: table-row;
+	  background: $portfolioElEvenBackground;
+	  color: $portfolioElEvenColor;
 		margin: 0;
 		overflow: visible;
 		position: relative;
 		padding: 3px 0;
 		width: 100%;
 		border: none;
-    max-height: 70px;
-    min-height: 50px;
+		height: 70px;
 		input{
 		 	background: inherit;
 			border: none;
 			color: black;
 		}
+		td{
+			display: table-cell;
+		}
 	}
-	li:nth-child(1){
+	tr:nth-child(1){
 		border-radius: 10px 10px 0 0;
 	}
-	li:nth-child(odd){
+	tr:nth-child(odd){
 		background: $portfolioElOddBackground;
 		color: $portfolioElOddColor;
 	}
@@ -108,38 +114,20 @@ main, .portfolioContainer{
 
 .editButton{
 	display: inline-block;
-  position: absolute;
-	@extend %verticalCenter;
 }
 
 .coinImage {
 	display: inline-block;
 	margin-right: 5px;
-	position: absolute;
-	left: 50px;
-		@extend %verticalCenter;
-
-	
-}
-
-.allCoinInfo{
-	position: absolute;
-	left: 90px;
-	@extend %verticalCenter;
 }
 
 .portfolioInfo{
   	display: inline-block;
-	
 }
 
 .portfolioChange{
 	display: inline-block;
-
   font-size: 1.25em;
-	position: absolute;
-	right: 30px;
-	@extend %verticalCenter;
 }
 
 .portfolioName, .portfolioTag{
@@ -197,9 +185,6 @@ main, .portfolioContainer{
 }
 
 .delete {
-	position: absolute;
-	right: 0;
-	@extend %verticalCenter;
 	input{
 		width: 20px;
 		height: 20px;
