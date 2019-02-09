@@ -413,25 +413,60 @@ function checkLocal(){
 	portfolioMsg(msg);
 }
 
+var tickerEl = document.createElement('canvas');
+tickerEl.setAttribute("class", "ticker");
+tickerEl.width=window.innerWidth;
+this.tickerEl.height=25;
+var ctx = tickerEl.getContext('2d');
+ctx.fillStyle='black';
+ctx.fillRect(0,0,tickerEl.width,tickerEl.height);
+$header.prepend(tickerEl);
 
 function Ticker(){
-	this.tickerEl = document.createElement('canvas');
-	this.tickerEl.setAttribute("class", "ticker");
-	this.tickerEl.width=window.innerWidth;
-	this.tickerEl.height=25;
-	this.ctx = this.tickerEl.getContext('2d');
-	this.ctx.fillStyle = 'black';
-	this.ctx.fillRect(0,0,this.tickerEl.width,this.tickerEl.height);
-	$header.prepend(this.tickerEl);
-
+	this.offset = 200;
+	this.count = Math.ceil(window.innerWidth/this.offset)+this.offset;
+	this.incrementer = 0;
+	//this.frameController = 1;
+	
 	this.tick = function (){
-		this.ctx.fillStyle = 'white';
-		this.ctx.font = '15px monospace';
-		var current = marketSummaries[0];
-		this.ctx.fillText(current['MarketName']+" ", 5,15);
-		var change = (current['Last']/current['PrevDay'])*100-100;
-		this.ctx.fillStyle = (change>=0)?"green":"red";
-		this.ctx.fillText("("+change.toFixed(3)+"%)", 85, 15);
+		
+		//if(this.frameController%10==0){
+			this.frameController=1;
+			if(this.offset==200){
+				this.incrementer+=1;
+				if (this.incrementer>=marketSummaries.length)
+					this.incrementer=0;
+				this.offset=0;
+			}
+			
+			ctx.fillStyle = 'black';
+		    ctx.fillRect(0,0,tickerEl.width,tickerEl.height);
+		    
+			for(var i = 0; i<this.count; i++){
+				/*
+				 * move each left by one each frame, 
+				 * when first one being printed at
+				 * <-200, put new one at end
+				 *
+				 */
+
+				ctx.fillStyle = 'white';
+				ctx.font = '15px monospace';
+				var current = marketSummaries[i+this.incrementer];
+				ctx.fillText(current['MarketName']+" ", i*200-this.offset+5,17);
+				var change = (current['Last']/current['PrevDay'])*100-100;
+				ctx.fillStyle = (change>=0)?"green":"red";
+				ctx.fillText("("+change.toFixed(3)+"%)", (i)*200-this.offset+100, 17);
+				
+			}
+			this.offset+=1;
+			
+		/*}
+		else{
+			this.frameController+=1;
+			
+		}*/
+		
 	}
 }
 
@@ -450,13 +485,18 @@ function coinImage(coin){
 	 $coinImage.height(30);
 	 $coinImage.width(30);
 	$coinImageContainer.append($coinImage);
+
 	return $coinImageContainer;
 }
-
+var ticker1 = new Ticker();
+function loop(){
+	ticker1.tick();
+	requestAnimationFrame(loop);
+}
 var main = function(){
 	checkLocal();
 	$searchInput.val("");
-	var ticker1 = new Ticker();
+	
 	fetch(marketsURL).then(function(response) {
 	  	response.text().then(function(text) {
 	    markets = JSON.parse(text);
@@ -478,7 +518,9 @@ var main = function(){
 				loadingComplete = true;
 		    	updatePortfolio();
 			}
-			ticker1.tick();	
+			
+			loop();
+
 		})
 	});
 };
