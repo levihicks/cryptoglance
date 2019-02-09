@@ -65,12 +65,14 @@ main, .portfolioContainer{
 .portfolioContainer{
 	display: inline-block;
 	border-radius: 10px;
+	overflow: auto;
 	background: $portfolioBackground;
 	color: $portfolioColor;
 	width: 70%;
 	max-width: 900px;
 	min-width: 500px;
 	height: 100%;
+	
 }
 
 .msg{
@@ -83,7 +85,10 @@ main, .portfolioContainer{
 	display: table;
 	width: 100%;
 	max-height: 100%;
+	border-spacing: 0px;
+	cellspacing: 0;
 	tr {
+		
 		display: table-row;
 	  background: $portfolioElEvenBackground;
 	  color: $portfolioElEvenColor;
@@ -103,9 +108,7 @@ main, .portfolioContainer{
 			display: table-cell;
 		}
 	}
-	tr:nth-child(1){
-		border-radius: 10px 10px 0 0;
-	}
+
 	tr:nth-child(odd){
 		background: $portfolioElOddBackground;
 		color: $portfolioElOddColor;

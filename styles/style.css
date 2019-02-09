@@ -46,6 +46,7 @@ main, .portfolioContainer {
 .portfolioContainer {
   display: inline-block;
   border-radius: 10px;
+  overflow: auto;
   background: white;
   color: black;
   width: 70%;
@@ -63,6 +64,8 @@ main, .portfolioContainer {
   display: table;
   width: 100%;
   max-height: 100%;
+  border-spacing: 0px;
+  cellspacing: 0;
 }
 #portfolio tr {
   display: table-row;
@@ -83,9 +86,6 @@ main, .portfolioContainer {
 }
 #portfolio tr td {
   display: table-cell;
-}
-#portfolio tr:nth-child(1) {
-  border-radius: 10px 10px 0 0;
 }
 #portfolio tr:nth-child(odd) {
   background: #a6a6a6;

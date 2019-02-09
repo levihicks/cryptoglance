@@ -413,12 +413,28 @@ function checkLocal(){
 	portfolioMsg(msg);
 }
 
-function createTicker(){
-	var $ticker = $("<canvas>").attr("style", "background: black;");
-	$ticker.width(window.innerWidth);
-	$ticker.height(20);
-	$header.prepend($ticker);
+
+function Ticker(){
+	this.tickerEl = document.createElement('canvas');
+	this.tickerEl.setAttribute("class", "ticker");
+	this.tickerEl.width=window.innerWidth;
+	this.tickerEl.height=25;
+	this.ctx = this.tickerEl.getContext('2d');
+	this.ctx.fillStyle = 'black';
+	this.ctx.fillRect(0,0,this.tickerEl.width,this.tickerEl.height);
+	$header.prepend(this.tickerEl);
+
+	this.tick = function (){
+		this.ctx.fillStyle = 'white';
+		this.ctx.font = '15px monospace';
+		var current = marketSummaries[0];
+		this.ctx.fillText(current['MarketName']+" ", 5,15);
+		var change = (current['Last']/current['PrevDay'])*100-100;
+		this.ctx.fillStyle = (change>=0)?"green":"red";
+		this.ctx.fillText("("+change.toFixed(3)+"%)", 85, 15);
+	}
 }
+
 
 function coinImage(coin){
 	var imgURL;
@@ -440,7 +456,7 @@ function coinImage(coin){
 var main = function(){
 	checkLocal();
 	$searchInput.val("");
-	createTicker();
+	var ticker1 = new Ticker();
 	fetch(marketsURL).then(function(response) {
 	  	response.text().then(function(text) {
 	    markets = JSON.parse(text);
@@ -462,7 +478,7 @@ var main = function(){
 				loadingComplete = true;
 		    	updatePortfolio();
 			}
-			
+			ticker1.tick();	
 		})
 	});
 };
