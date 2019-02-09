@@ -416,57 +416,39 @@ function checkLocal(){
 var tickerEl = document.createElement('canvas');
 tickerEl.setAttribute("class", "ticker");
 tickerEl.width=window.innerWidth;
-this.tickerEl.height=25;
+this.tickerEl.height=35;
 var ctx = tickerEl.getContext('2d');
 ctx.fillStyle='black';
 ctx.fillRect(0,0,tickerEl.width,tickerEl.height);
 $header.prepend(tickerEl);
 
 function Ticker(){
-	this.offset = 200;
-	this.count = Math.ceil(window.innerWidth/this.offset)+this.offset;
-	this.incrementer = 0;
-	//this.frameController = 1;
-	
+	this.elWidth = this.offset = 280;
+	this.count = Math.ceil(tickerEl.width/this.offset)+1;
+	this.incrementer = -1;
 	this.tick = function (){
-		
-		//if(this.frameController%10==0){
-			this.frameController=1;
-			if(this.offset==200){
+			if(this.offset==this.elWidth){
 				this.incrementer+=1;
 				if (this.incrementer>=marketSummaries.length)
 					this.incrementer=0;
 				this.offset=0;
 			}
-			
 			ctx.fillStyle = 'black';
 		    ctx.fillRect(0,0,tickerEl.width,tickerEl.height);
-		    
 			for(var i = 0; i<this.count; i++){
-				/*
-				 * move each left by one each frame, 
-				 * when first one being printed at
-				 * <-200, put new one at end
-				 *
-				 */
-
 				ctx.fillStyle = 'white';
-				ctx.font = '15px monospace';
+				ctx.font = '18px monospace';
 				var current = marketSummaries[i+this.incrementer];
-				ctx.fillText(current['MarketName']+" ", i*200-this.offset+5,17);
+				var name = current['MarketName'];
+				ctx.fillText(name+" ", i*this.elWidth-this.offset+5,23);
 				var change = (current['Last']/current['PrevDay'])*100-100;
-				ctx.fillStyle = (change>=0)?"green":"red";
-				ctx.fillText("("+change.toFixed(3)+"%)", (i)*200-this.offset+100, 17);
+				ctx.fillStyle = (change==0)?"gray":(change>=0)?"lightgreen":"#ff6666";
+				ctx.font = ('14px monospace');
+				ctx.fillText(current['Last'].toFixed(8)+"("+change.toFixed(3)+"%)", 
+							i*this.elWidth-this.offset+name.length*12, 22);
 				
 			}
 			this.offset+=1;
-			
-		/*}
-		else{
-			this.frameController+=1;
-			
-		}*/
-		
 	}
 }
 
