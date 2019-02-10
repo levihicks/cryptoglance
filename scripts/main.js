@@ -422,15 +422,26 @@ ctx.fillStyle='black';
 ctx.fillRect(0,0,tickerEl.width,tickerEl.height);
 $header.prepend(tickerEl);
 
+/*var marketSummariesTest = [];
+marketSummariesTest.push({'MarketName':'USDT-TSD1', 'Last': 1.00490029, 'PrevDay': 1});
+marketSummariesTest.push({'MarketName':'USDT-TSD2', 'Last': 1.00490029, 'PrevDay': 1});
+marketSummariesTest.push({'MarketName':'USDT-TSD3', 'Last': 1.00490029, 'PrevDay': 1});
+marketSummariesTest.push({'MarketName':'USDT-TSD4', 'Last': 1.00490029, 'PrevDay': 1});
+marketSummariesTest.push({'MarketName':'USDT-TSD5', 'Last': 1.00490029, 'PrevDay': 1});
+*/
+
 function Ticker(){
 	this.elWidth = this.offset = 280;
 	this.count = Math.ceil(tickerEl.width/this.offset)+1;
-	this.incrementer = -1;
+	this.incrementers = [this.count];
+	for(let i = 0; i < this.count; i++){
+		this.incrementers[i]=-1;
+	}
 	this.tick = function (){
 			if(this.offset==this.elWidth){
-				this.incrementer+=1;
-				if (this.incrementer>=marketSummaries.length)
-					this.incrementer=0;
+				for(let i = 0; i < this.count; i++){
+					this.incrementers[i]+=1;
+				}
 				this.offset=0;
 			}
 			ctx.fillStyle = 'black';
@@ -438,7 +449,9 @@ function Ticker(){
 			for(var i = 0; i<this.count; i++){
 				ctx.fillStyle = 'white';
 				ctx.font = '18px monospace';
-				var current = marketSummaries[i+this.incrementer];
+				if(i+this.incrementers[i] == marketSummaries.length)
+					this.incrementers[i]=-i;
+				var current = marketSummaries[i+this.incrementers[i]];
 				var name = current['MarketName'];
 				ctx.fillText(name+" ", i*this.elWidth-this.offset+5,23);
 				var change = (current['Last']/current['PrevDay'])*100-100;
