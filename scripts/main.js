@@ -101,10 +101,8 @@ function confirmAddClick(event){
 				isIn = true;
 			}
 		});
-		if(!isIn){
+		if(!isIn)
 			added.push(newCoin);
-			console.log("added");
-		}
 		updateLocal();
 		removeAddPrompt($cancelButtonDiv.parent());
 		updatePortfolio();
@@ -128,10 +126,8 @@ function confirmEditClick(event){
 				isIn = true;
 			}
 		});
-		if(!isIn){
+		if(!isIn)
 			added.push(newCoin);
-			console.log("added");
-		}
 		updateLocal();
 		removeAddPrompt($cancelButtonDiv.parent());
 		updatePortfolio();
@@ -223,23 +219,23 @@ function portfolioTag(tag){
 }
 
 function portfolioQuantity(quantity){
-	return $("<div>").text("Total Quantity: "+quantity).attr("class", "portfolioQuantity");
+	return $("<td>").text(quantity).attr("class", "portfolioQuantity");
 }
 
 function portfolioCost(cost){
-	return $("<div>").text("Total Initial Cost: "+cost.toFixed(8)).attr("class", "portfolioCost");
+	return $("<td>").text(cost.toFixed(8)).attr("class", "portfolioCost");
 }
 
 function currentPrice(coin){
 	var currentPrice = getCurrentPrice(coin);
-	var $currentPriceContainer = $("<div>").attr("class", "currentPrice").text("Current Price: "+currentPrice);
+	var $currentPriceContainer = $("<td>").attr("class", "currentPrice").text(currentPrice);
 	return $currentPriceContainer;
 }
 
 
 function currentWorth(coin){
 	var currentWorth = getCurrentWorth(coin);
-	var $currentWorthContainer = $("<div>").attr("class", "currentWorth").text("Total Current Worth: "+currentWorth);
+	var $currentWorthContainer = $("<td>").attr("class", "currentWorth").text(currentWorth);
 	return $currentWorthContainer;
 }
 
@@ -308,31 +304,23 @@ function priceChange(coin){
 	return $changeContainer;
 }
 
-function currentInfo(coin){
-	var $currentWorthContainer = currentWorth(coin);
-	var $currentPriceContainer = currentPrice(coin);
-	var $currentInfoContainer = $("<div>").attr("class", "current");
-	$currentInfoContainer.append($currentWorthContainer, $currentPriceContainer);
-	return $currentInfoContainer;
-}
-
 function displayPortfolioCoin(coin){
 	$portfolioLi = $("<tr>");
-	var $editButtonContainer = editButtonDiv(coin);
-	var $coinImageContainer = coinImage(coin);
+	var $editButtonCell = editButtonDiv(coin);
+	var $coinImageCell = coinImage(coin);
 	var $nameContainer = portfolioName(coin.name);
 	var $tagContainer = portfolioTag(coin.tag);
-	var $amountContainer = portfolioQuantity(coin.quantity);
-	var $costContainer = portfolioCost(coin.cost*coin.quantity);
-	var $currentInfoContainer = currentInfo(coin);
-	var $changeContainer = priceChange(coin);
-	var $portfolioInfoContainer = $("<div>").attr("class", "portfolioInfo");
-	var $deleteContainer = deleteButton(coin);
-	var $allCoinInfo = $("<td>").attr("class", "allCoinInfo");
-	$portfolioInfoContainer.append($nameContainer, $tagContainer, $amountContainer, $costContainer);
-	$allCoinInfo.append($portfolioInfoContainer, $currentInfoContainer);
-	$portfolioLi.append($editButtonContainer, $coinImageContainer, $allCoinInfo,
-					    $changeContainer, $deleteContainer);
+	var $nameAndTag = $("<td>");
+	$nameAndTag.append($nameContainer, $tagContainer);
+	var $amountCell = portfolioQuantity(coin.quantity);
+	var $costCell = portfolioCost(coin.cost*coin.quantity);
+	var $currentWorthCell = currentWorth(coin);
+	var $currentPriceCell = currentPrice(coin);
+	var $changeCell = priceChange(coin);
+	var $deleteCell = deleteButton(coin);
+	$portfolioLi.append($editButtonCell, $coinImageCell, $nameAndTag,
+						$amountCell, $costCell, $currentWorthCell,
+						$currentPriceCell, $changeCell, $deleteCell);
 	$("#portfolio").append($portfolioLi);
 }
 
@@ -340,6 +328,25 @@ function portfolioMsg(msg){
 	$portfolioDiv.empty();
 	var $msg = $("<div>").attr("class", "msg").text(msg);
 	$portfolioDiv.append($msg);
+}
+
+function portfolioHead(){
+	var $headRow = $("<tr>").attr("class", "portfolioHead");
+	var headEls = new Array(9);
+	var descriptorsAndText = [["edit",""], ["image",""], ["name","Name"],
+							  ["quantity","Quantity"], 
+							  ["initialCost","Initial Cost"],
+							  ["currentWorth","Current Worth"],
+							  ["currentPrice", "Current Price"],
+							  ["change","Percent Change"],["delete",""]];
+	for(var i=0; i<headEls.length;i++){
+		descriptorsAndText[i][0]+="Head";
+		headEls[i]=$("<th>");
+		headEls[i].attr("class", descriptorsAndText[i][0]);
+		headEls[i].text(descriptorsAndText[i][1]);
+		$headRow.append(headEls[i]);
+	}
+	return $headRow;
 }
 
 function updatePortfolio(){
@@ -353,6 +360,8 @@ function updatePortfolio(){
 			var $portfolio = $("<table>").attr("id", "portfolio");
 			$portfolioDiv.append($portfolio);
 		}
+		var $headRow = portfolioHead();
+		$portfolio.append($headRow);
 		added.forEach(function(coin){
 				displayPortfolioCoin(coin);
 		});
