@@ -32,7 +32,7 @@ h1 {
 main {
   width: 100%;
   min-width: 970px;
-  height: 93%;
+  height: 90%;
 }
 
 main, .portfolioContainer {
@@ -65,7 +65,6 @@ main, .portfolioContainer {
   width: 100%;
   max-height: 100%;
   border-spacing: 0px;
-  cellspacing: 0;
 }
 #portfolio tr {
   display: table-row;
@@ -163,7 +162,7 @@ main, .portfolioContainer {
   background: green;
 }
 
-.delete input {
+.delete input, .deleteHead input {
   width: 20px;
   height: 20px;
   margin-right: 5px;

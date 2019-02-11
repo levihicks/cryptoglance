@@ -20,18 +20,18 @@ $addPromptBackground:  #333333;
 %verticalCenter {
 	position: relative;
 	top:50%;
-  	transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 html {
 	height: 100%;
 	background:  $background;
-  	color: $headerColor;
+  color: $headerColor;
 }
 
 body {
 	height: 95%;
-    min-height: 300px;
+  min-height: 300px;
 	max-height: 900px;
 	margin: auto;
 	font-family: $ubuntuFont;
@@ -44,14 +44,14 @@ h1, .portfolioContainer{
 h1{
 	border-bottom: 2px solid #ff6666;
 	border-top: 2px solid #9fdf9f;
-  	width: 200px;
-  	margin: 10px auto; 
+  width: 200px;
+  margin: 10px auto; 
 }
 
 main{
 	width: 100%;
-  	min-width: 970px;
-	height: 93%;
+  min-width: 970px;
+	height: 90%;
 }
 
 main, .portfolioContainer{
@@ -72,7 +72,6 @@ main, .portfolioContainer{
 	max-width: 900px;
 	min-width: 500px;
 	height: 100%;
-	
 }
 
 .msg{
@@ -86,9 +85,7 @@ main, .portfolioContainer{
 	width: 100%;
 	max-height: 100%;
 	border-spacing: 0px;
-	cellspacing: 0;
 	tr {
-		
 		display: table-row;
 	  background: $portfolioElEvenBackground;
 	  color: $portfolioElEvenColor;
@@ -108,7 +105,6 @@ main, .portfolioContainer{
 			display: table-cell;
 		}
 	}
-
 	tr:nth-child(odd){
 		background: $portfolioElOddBackground;
 		color: $portfolioElOddColor;
@@ -179,15 +175,15 @@ main, .portfolioContainer{
 	padding: 5px 10px;
 }
 
-#cancelDelete{
+#cancelDelete {
 	background: darkred;
 }
 
-#confirmDelete{
+#confirmDelete {
 	background: green;
 }
 
-.delete {
+.delete, .deleteHead {
 	input{
 		width: 20px;
 		height: 20px;
@@ -199,7 +195,7 @@ p {
 	display: inline;
 }
 
-.search{
+.search {
 	display: inline-block;
   height: 100%;
 	min-height: 300px;
@@ -212,21 +208,21 @@ p {
 	overflow: auto;
 }
 
-#searchInput, button[name=searchButton]{
+#searchInput, button[name=searchButton] {
 	border: none;
 	border-radius: 10px;
 	height: 25px;
 	margin-top: 3px;
 }
 
-#searchInput{
+#searchInput {
 	width: 80%;
 	background: $searchInputBackground;
 	font-family: $ubuntuFont;
 	padding-left: 5px;
 }
 
-ul{
+ul {
 	margin: 0;
 	padding: 0;
 }

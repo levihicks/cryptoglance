@@ -8,7 +8,7 @@ var markets, query, marketSummaries;
 var marketsURL = 'https://cors.io/?https://www.bittrex.com/api/v1.1/public/getmarkets';
 var marketSummariesURL = 'https://cors.io/?https://bittrex.com/api/v1.1/public/getmarketsummaries';
 var added = [];
-var loadingComplete = false;
+var loadingComplete = summariesLoading = false;
 $searchInput.keyup(function(event){
 	displayResults();
 });
@@ -330,6 +330,16 @@ function portfolioMsg(msg){
 	$portfolioDiv.append($msg);
 }
 
+function RefreshButton(){
+	var $refreshButton = $("<input>").attr("type", "image")
+						.attr("id", "refreshButton").attr("src", "./images/refresh.png");
+	$refreshButton.click(function(){
+		if(!summariesLoading)
+			refreshSummaries();
+	});
+	return $refreshButton;
+}
+
 function portfolioHead(){
 	var $headRow = $("<tr>").attr("class", "portfolioHead");
 	var headEls = new Array(9);
@@ -344,6 +354,10 @@ function portfolioHead(){
 		headEls[i]=$("<th>");
 		headEls[i].attr("class", descriptorsAndText[i][0]);
 		headEls[i].text(descriptorsAndText[i][1]);
+		if(descriptorsAndText[i][0]=="deleteHead"){
+			var $refreshButton = RefreshButton();
+			headEls[i].append($refreshButton);
+		}
 		$headRow.append(headEls[i]);
 	}
 	return $headRow;
@@ -497,6 +511,52 @@ function loop(){
 	ticker1.tick();
 	requestAnimationFrame(loop);
 }
+
+function LoadBoxes(){
+	var canvas = document.createElement('canvas');
+	canvas.height = canvas.width = 20;
+	canvas.setAttribute("class", "loadBoxes");
+	const loadctx = canvas.getContext('2d');
+	var loopCount = 0;
+	function loadBoxLoop(){
+	  loadctx.fillStyle='#a6a6a6';
+	  loadctx.fillRect(0,0,20,20);
+	  for (let i = 0; i < 3; i++){
+	    loadctx.fillStyle='black';
+	    if(Math.floor(loopCount/10)==i)
+	      loadctx.fillStyle='white';
+	    loadctx.fillRect(i*8, 8, 4, 4);
+	  }
+	  loopCount=(loopCount==29)?1:loopCount+=1;
+	  requestAnimationFrame(loadBoxLoop);
+	}
+
+	loadBoxLoop();
+	return canvas;
+}
+
+function refreshSummaries(){
+	summariesLoading = true;
+	var refreshButton = $("#refreshButton");
+	refreshButton.remove();
+	var loadBoxes = LoadBoxes();
+	let $delHead = $(".deleteHead");
+	$delHead.empty();
+	$delHead.append(loadBoxes);
+	fetch(marketSummariesURL).then(function(response){
+		response.text().then(function(text){
+			marketSummaries = JSON.parse(text);
+			marketSummaries = marketSummaries.result;
+			summariesLoading = false;
+			let $delHead = $(".deleteHead");
+			$delHead.empty();
+			let $refreshButton = RefreshButton();
+			$delHead.append($refreshButton);
+			updatePortfolio();
+		})
+	});
+}
+
 var main = function(){
 	checkLocal();
 	$searchInput.val("");
