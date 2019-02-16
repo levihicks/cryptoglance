@@ -299,7 +299,7 @@ function priceChange(coin){
 	change=change.toFixed(3);
 	var indicator = (change>=0)?"▲ ":"▼ ";
 	var $changeContainer = $("<td>").attr("class","portfolioChange").text(indicator+change+"%");
-	var color = (change>=0)?"green":"red";
+	var color = (change>=0)?"#339933":"#ff3333";
 	$changeContainer.attr("style", "color: "+color+";");
 	return $changeContainer;
 }
@@ -469,7 +469,7 @@ function Ticker(){
 		    ctx.fillRect(0,0,tickerEl.width,tickerEl.height);
 			for(var i = 0; i<this.count; i++){
 				ctx.fillStyle = 'white';
-				ctx.font = '18px monospace';
+				ctx.font = '18px \'Ubuntu Mono\'';
 				if(i+this.incrementers[i] == marketSummaries.length)
 					this.incrementers[i]=-i;
 				var current = marketSummaries[i+this.incrementers[i]];
@@ -517,12 +517,12 @@ function LoadBoxes(){
 	const loadctx = canvas.getContext('2d');
 	var loopCount = 0;
 	function loadBoxLoop(){
-	  loadctx.fillStyle='#a6a6a6';
-	  loadctx.fillRect(0,0,20,20);
+	  //loadctx.fillStyle='#a6a6a6';
+	  //loadctx.fillRect(0,0,20,20);
 	  for (let i = 0; i < 3; i++){
 	    loadctx.fillStyle='black';
 	    if(Math.floor(loopCount/10)==i)
-	      loadctx.fillStyle='white';
+	      loadctx.fillStyle='gray';
 	    loadctx.fillRect(i*8, 8, 4, 4);
 	  }
 	  loopCount=(loopCount==29)?1:loopCount+=1;

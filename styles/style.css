@@ -37,6 +37,7 @@ main {
   width: 100%;
   min-width: 970px;
   height: 90%;
+  background-image: url("../images/background.png");
 }
 
 main, .portfolioContainer {
@@ -48,6 +49,7 @@ main, .portfolioContainer {
 }
 
 .portfolioContainer {
+  font-family: "ZCOOL QingKe HuangYou", cursive;
   display: inline-block;
   border-radius: 10px;
   overflow: auto;
@@ -70,9 +72,15 @@ main, .portfolioContainer {
   max-height: 100%;
   border-spacing: 0px;
 }
+#portfolio th {
+  background: white;
+  font-weight: normal;
+  font-size: 1.2em;
+  color: #404040;
+}
 #portfolio tr {
   display: table-row;
-  background: #e6e6e6;
+  background: whitesmoke;
   color: black;
   margin: 0;
   overflow: visible;
@@ -89,10 +97,11 @@ main, .portfolioContainer {
 }
 #portfolio tr td {
   display: table-cell;
+  font-family: "Ubuntu Mono", monospace;
 }
 #portfolio tr:nth-child(odd) {
-  background: #a6a6a6;
-  color: white;
+  background: white;
+  color: black;
 }
 
 .editButton {
