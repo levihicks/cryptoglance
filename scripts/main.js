@@ -313,14 +313,14 @@ function displayPortfolioCoin(coin){
 	var $nameAndTag = $("<td>");
 	$nameAndTag.append($nameContainer, $tagContainer);
 	var $amountCell = portfolioQuantity(coin.quantity);
-	var $costCell = portfolioCost(coin.cost*coin.quantity);
-	var $currentWorthCell = currentWorth(coin);
+	//var $costCell = portfolioCost(coin.cost*coin.quantity);
+	//var $currentWorthCell = currentWorth(coin);
 	var $currentPriceCell = currentPrice(coin);
 	var $changeCell = priceChange(coin);
 	var $deleteCell = deleteButton(coin);
 	$portfolioLi.append($editButtonCell, $coinImageCell, $nameAndTag,
-						$amountCell, $costCell, $currentWorthCell,
-						$currentPriceCell, $changeCell, $deleteCell);
+						$amountCell, $currentPriceCell, $changeCell, 
+						$deleteCell);
 	$("#portfolio").append($portfolioLi);
 }
 
@@ -342,11 +342,9 @@ function RefreshButton(){
 
 function portfolioHead(){
 	var $headRow = $("<tr>").attr("class", "portfolioHead");
-	var headEls = new Array(9);
+	var headEls = new Array(7);
 	var descriptorsAndText = [["edit",""], ["image",""], ["name","Name"],
 							  ["quantity","Quantity"], 
-							  ["initialCost","Initial Cost"],
-							  ["currentWorth","Current Worth"],
 							  ["currentPrice", "Current Price"],
 							  ["change","Percent Change"],["delete",""]];
 	for(var i=0; i<headEls.length;i++){
