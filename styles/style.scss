@@ -29,6 +29,10 @@ html {
 	height: 100%;
 	background:  $background;
   color: $headerColor;
+	background-image: url("../images/background.png"), url("../images/backgroundright.png");
+  background-repeat: repeat-y;
+	background-position: top left, top right;
+
 }
 
 body {
@@ -37,19 +41,25 @@ body {
 	max-height: 900px;
 	margin: auto;
 	font-family: $ubuntuFont;
+	
 }
 
 h1, .portfolioContainer{
 	text-align: center;
 }
 
+header{
+	background:  $background;
+	padding-bottom: 10px;
+}
+
 h1{
 	border-bottom: 2px solid #ff6666;
 	border-top: 2px solid #9fdf9f;
   width: 200px;
-  margin: 10px auto; 
+  margin: 10px auto 0 auto;
 	width: 92%;
-	min-width: 700px;
+	min-width: 970px;
 	max-width: 1285px;
 	text-align: left;
 }
@@ -58,7 +68,8 @@ main{
 	width: 100%;
   min-width: 970px;
 	height: 90%;
-	background-image: url("../images/background.png");
+	
+	
 }
 
 main, .portfolioContainer{
@@ -67,6 +78,7 @@ main, .portfolioContainer{
 	display: inline-block;
 	vertical-align: top;
 	text-align: center;
+	
 }
 
 .portfolioContainer{
@@ -74,6 +86,7 @@ main, .portfolioContainer{
 	display: inline-block;
 	border-radius: 10px;
 	overflow: auto;
+	
 	background: $portfolioBackground;
 	color: $portfolioColor;
 	width: 70%;

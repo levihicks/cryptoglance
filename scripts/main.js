@@ -340,6 +340,9 @@ function RefreshButton(){
 	return $refreshButton;
 }
 
+
+
+
 function portfolioHead(){
 	var $headRow = $("<tr>").attr("class", "portfolioHead");
 	var headEls = new Array(7);
@@ -453,7 +456,7 @@ marketSummariesTest.push({'MarketName':'USDT-TSD5', 'Last': 1.00490029, 'PrevDay
 
 function Ticker(){
 	this.elWidth = this.offset = 280;
-	this.count = Math.ceil(tickerEl.width/this.offset)+1;
+	this.count = 20;
 	this.incrementers = [this.count];
 	for(let i = 0; i < this.count; i++){
 		this.incrementers[i]=-1;
@@ -484,6 +487,10 @@ function Ticker(){
 			}
 			this.offset+=1;
 	}
+	this.updateSize = function(){
+		tickerEl.width=(window.innerWidth>970)?window.innerWidth:970;
+
+	}
 }
 
 
@@ -509,6 +516,7 @@ function loop(){
 	ticker1.tick();
 	requestAnimationFrame(loop);
 }
+window.onresize = ticker1.updateSize;
 
 function LoadBoxes(){
 	var canvas = document.createElement('canvas');
