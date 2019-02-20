@@ -134,25 +134,20 @@ function confirmEditClick(event){
 	}
 }
 
-function confirmAddDiv(val, fullTag, coinName, $cancelButtonDiv){
+function confirmAddButton(val, fullTag, coinName, $cancelButtonDiv){
 	var $confirmAddButton = $("<input>").attr("type", "button");
 	$confirmAddButton.attr("name", "confirmAddButton");
 	$confirmAddButton.attr("value", val);
 	$confirmAddButton.on("click", {fullTag: fullTag, coinName: coinName, $cancelButtonDiv: $cancelButtonDiv}, confirmAddClick);
-	var $confirmAddDiv = $("<div>").attr("class", "confirmAddContainer");
-	$confirmAddDiv.append($confirmAddButton);
-	
-	return $confirmAddDiv;
+	return $confirmAddButton;
 }
 
-function confirmEditDiv(val, fullTag, coinName, $cancelButtonDiv){
+function confirmEditButton(val, fullTag, coinName, $cancelButtonDiv){
 	var $confirmAddButton = $("<input>").attr("type", "button");
 	$confirmAddButton.attr("name", "confirmAddButton");
 	$confirmAddButton.attr("value", val);
 	$confirmAddButton.on("click", {fullTag: fullTag, coinName: coinName, $cancelButtonDiv: $cancelButtonDiv}, confirmEditClick);
-	var $confirmAddDiv = $("<div>").attr("class", "confirmAddContainer");
-	$confirmAddDiv.append($confirmAddButton);
-	return $confirmAddDiv;
+	return $confirmAddButton;
 }
 
 function displayAddForm($parent){
@@ -164,8 +159,17 @@ function displayAddForm($parent){
 	var coinTag = tags[1];
 	var $cancelButtonDiv = cancelButtonDiv();
 	var $addNameDiv = $("<div>").text(coinName).attr("class", "addNameContainer");
-	var $confirmAddDiv = confirmAddDiv("+",fullTag, coinName, $cancelButtonDiv);
-	$addPrompt.append($cancelButtonDiv, $addNameDiv, addQuantityDiv(coinTag), addCostDiv(baseTag), $confirmAddDiv);
+	var $confirmAddButton = confirmAddButton("+",fullTag, coinName, $cancelButtonDiv);
+	var $confirmAddDiv = $("<div>").attr("class","confirmAddContainer");
+	var $addQuantityDiv = addQuantityDiv(coinTag);
+	var $addCostDiv = addCostDiv(baseTag);
+	$addPrompt.keyup(function(event){
+		if(event.keyCode==13)
+			$confirmAddButton.click();
+	})
+	$confirmAddDiv.append($confirmAddButton);
+
+	$addPrompt.append($cancelButtonDiv, $addNameDiv, $addQuantityDiv, $addCostDiv, $confirmAddDiv);
 	$main.append(promptBackground(), $addPrompt);
 }
 
@@ -182,16 +186,12 @@ function getCurrentPrice(coin){
 	return result.toFixed(8);
 }
 
-function getCurrentWorth(coin){
-	return (getCurrentPrice(coin) * coin.quantity).toFixed(8);
-}
-
 function editButtonDiv(coin){
 	var $editButtonContainer = $("<td>").attr("class", "editButton");
 	var $editButton = $("<input>").attr("value", "[Edit]").attr("type", "button");
 	$editButton.click(function(){
 		added.forEach(function(addedCoin){
-			if(addedCoin.name==coin.name){
+			if(addedCoin.tag==coin.tag){
 				var $addPrompt = addPrompt();
 				var coinName = addedCoin.name;
 				var fullTag = addedCoin.tag;
@@ -199,8 +199,15 @@ function editButtonDiv(coin){
 				var tags = fullTag.split("-");
 				var baseTag = tags[0];
 				var coinTag = tags[1];
+				
 				var $addNameDiv = $("<div>").text(coinName).attr("class", "addNameContainer");
-				var $confirmAddDiv = confirmEditDiv("Update", fullTag, coinName, $cancelButtonDiv);
+				var $confirmAddButton = confirmEditButton("Update", fullTag, coinName, $cancelButtonDiv);
+				$addPrompt.keyup(function(event){
+					if(event.keyCode==13)
+						$confirmAddButton.click();
+				})
+				var $confirmAddDiv = $("<div>").attr("class","confirmAddContainer");
+				$confirmAddDiv.append($confirmAddButton);
 				$addPrompt.append($cancelButtonDiv, $addNameDiv, addQuantityDiv(coinTag), addCostDiv(baseTag),  $confirmAddDiv);
 				$main.append(promptBackground(), $addPrompt);
 			}
@@ -230,13 +237,6 @@ function currentPrice(coin){
 	var currentPrice = getCurrentPrice(coin);
 	var $currentPriceContainer = $("<td>").attr("class", "currentPrice").text(currentPrice);
 	return $currentPriceContainer;
-}
-
-
-function currentWorth(coin){
-	var currentWorth = getCurrentWorth(coin);
-	var $currentWorthContainer = $("<td>").attr("class", "currentWorth").text(currentWorth);
-	return $currentWorthContainer;
 }
 
 function deletePrompt(){
@@ -295,7 +295,7 @@ function deleteButton(coin){
 }
 
 function priceChange(coin){
-	var change = ((getCurrentWorth(coin)/(coin.cost*coin.quantity)) * 100)-100;
+	var change = (((getCurrentPrice(coin) * coin.quantity)/(coin.cost*coin.quantity)) * 100)-100;
 	change=change.toFixed(3);
 	var indicator = (change>=0)?"▲ ":"▼ ";
 	var $changeContainer = $("<td>").attr("class","portfolioChange").text(indicator+change+"%");
@@ -313,8 +313,6 @@ function displayPortfolioCoin(coin){
 	var $nameAndTag = $("<td>");
 	$nameAndTag.append($nameContainer, $tagContainer);
 	var $amountCell = portfolioQuantity(coin.quantity);
-	//var $costCell = portfolioCost(coin.cost*coin.quantity);
-	//var $currentWorthCell = currentWorth(coin);
 	var $currentPriceCell = currentPrice(coin);
 	var $changeCell = priceChange(coin);
 	var $deleteCell = deleteButton(coin);
