@@ -1,7 +1,7 @@
 $ubuntuFont: 'ubuntu', sans-serif;
 $ZCOOLFont: 'ZCOOL QingKe HuangYou', cursive;
 $ubuntuMonoFont: 'Ubuntu Mono', monospace;
-$background:  #cce6ff;
+$background:  whitesmoke;
 $headerColor: #404040;
 $portfolioBackground: white;
 $portfolioColor: black;
@@ -29,10 +29,6 @@ html {
 	height: 100%;
 	background:  $background;
   color: $headerColor;
-	background-image: url("../images/background.png"), url("../images/backgroundright.png");
-  background-repeat: repeat-y;
-	background-position: top left, top right;
-
 }
 
 body {
@@ -68,8 +64,6 @@ main{
 	width: 100%;
   min-width: 970px;
 	height: 90%;
-	
-	
 }
 
 main, .portfolioContainer{
@@ -93,6 +87,10 @@ main, .portfolioContainer{
 	max-width: 900px;
 	min-width: 500px;
 	height: 100%;
+}
+
+.portfolioContainer, .search{
+	border: 2px solid white;
 }
 
 .msg{
@@ -254,7 +252,6 @@ ul {
 	margin: 0;
 	padding: 0;
 }
-
 
 li {
 	font-family: $listElFont;

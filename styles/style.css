@@ -6,11 +6,8 @@
 
 html {
   height: 100%;
-  background: #cce6ff;
+  background: whitesmoke;
   color: #404040;
-  background-image: url("../images/background.png"), url("../images/backgroundright.png");
-  background-repeat: repeat-y;
-  background-position: top left, top right;
 }
 
 body {
@@ -26,7 +23,7 @@ h1, .portfolioContainer {
 }
 
 header {
-  background: #cce6ff;
+  background: whitesmoke;
   padding-bottom: 10px;
 }
 
@@ -66,6 +63,10 @@ main, .portfolioContainer {
   max-width: 900px;
   min-width: 500px;
   height: 100%;
+}
+
+.portfolioContainer, .search {
+  border: 2px solid white;
 }
 
 .msg {
