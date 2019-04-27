@@ -1,7 +1,7 @@
 $ubuntuFont: 'ubuntu', sans-serif;
 $ZCOOLFont: 'ZCOOL QingKe HuangYou', cursive;
 $ubuntuMonoFont: 'Ubuntu Mono', monospace;
-$background:  whitesmoke;
+$background:  white;
 $headerColor: #404040;
 $portfolioBackground: white;
 $portfolioColor: black;
@@ -89,10 +89,6 @@ main, .portfolioContainer{
 	height: 100%;
 }
 
-.portfolioContainer, .search{
-	border: 2px solid white;
-}
-
 .msg{
 	@extend %verticalCenter;
 	text-align: center;
@@ -109,6 +105,7 @@ main, .portfolioContainer{
 		font-weight: normal;
     font-size: 1.2em;
 		color: $headerColor;
+		border-bottom: 1px solid gray;
 	}
 	tr {
 		display: table-row;
@@ -121,6 +118,7 @@ main, .portfolioContainer{
 		width: 100%;
 		border: none;
 		height: 70px;
+		
 		input{
 		 	background: inherit;
 			border: none;
@@ -129,6 +127,7 @@ main, .portfolioContainer{
 		td{
 			display: table-cell;
 			font-family: $ubuntuMonoFont;
+			border-bottom: 1px solid gray;
 		}
 	}
 	tr:nth-child(odd){

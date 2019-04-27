@@ -74,6 +74,12 @@ function addQuantityDiv(coinTag){
 	return $addQuantityDiv;
 }
 
+function addEditQuantityDiv(q, coinTag){
+	var $addQuantityDiv = addQuantityDiv(coinTag);
+	$addQuantityDiv.find("#addQuantity").val(q);
+	return $addQuantityDiv;
+}
+
 function addCostDiv(baseTag){
 	var $addCostDiv = $("<div>").attr("class", "addCostContainer");
 	var $addCostInput = $("<input>").attr("id", "addCost");
@@ -81,6 +87,12 @@ function addCostDiv(baseTag){
 	var $addCostLabel = $("<label>").attr("for", "addCost");
 	$addCostLabel.text("Cost (" + baseTag + "): ");
 	$addCostDiv.append($addCostLabel, $addCostInput);
+	return $addCostDiv;
+}
+
+function addEditCostDiv(c, baseTag){
+	var $addCostDiv = addCostDiv(baseTag);
+	$addCostDiv.find("#addCost").val(c);
 	return $addCostDiv;
 }
 
@@ -208,7 +220,8 @@ function editButtonDiv(coin){
 				})
 				var $confirmAddDiv = $("<div>").attr("class","confirmAddContainer");
 				$confirmAddDiv.append($confirmAddButton);
-				$addPrompt.append($cancelButtonDiv, $addNameDiv, addQuantityDiv(coinTag), addCostDiv(baseTag),  $confirmAddDiv);
+				$addPrompt.append($cancelButtonDiv, $addNameDiv, addEditQuantityDiv(addedCoin.quantity, coinTag),
+									addEditCostDiv(addedCoin.cost, baseTag),  $confirmAddDiv);
 				$main.append(promptBackground(), $addPrompt);
 			}
 		});

@@ -6,7 +6,7 @@
 
 html {
   height: 100%;
-  background: whitesmoke;
+  background: white;
   color: #404040;
 }
 
@@ -23,7 +23,7 @@ h1, .portfolioContainer {
 }
 
 header {
-  background: whitesmoke;
+  background: white;
   padding-bottom: 10px;
 }
 
@@ -65,10 +65,6 @@ main, .portfolioContainer {
   height: 100%;
 }
 
-.portfolioContainer, .search {
-  border: 2px solid white;
-}
-
 .msg {
   text-align: center;
   font-style: italic;
@@ -85,6 +81,7 @@ main, .portfolioContainer {
   font-weight: normal;
   font-size: 1.2em;
   color: #404040;
+  border-bottom: 1px solid gray;
 }
 #portfolio tr {
   display: table-row;
@@ -106,6 +103,7 @@ main, .portfolioContainer {
 #portfolio tr td {
   display: table-cell;
   font-family: "Ubuntu Mono", monospace;
+  border-bottom: 1px solid gray;
 }
 #portfolio tr:nth-child(odd) {
   background: white;
