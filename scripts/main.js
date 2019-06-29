@@ -5,8 +5,8 @@ var $main = $("main");
 var $header=$("header");
 var $portfolioDiv = $(".portfolioContainer");
 var markets, query, marketSummaries;
-var marketsURL = 'https://cors.io/?https://www.bittrex.com/api/v1.1/public/getmarkets';
-var marketSummariesURL = 'https://cors.io/?https://bittrex.com/api/v1.1/public/getmarketsummaries';
+var marketsURL = 'https://cors-anywhere.herokuapp.com/https://www.bittrex.com/api/v1.1/public/getmarkets';
+var marketSummariesURL = 'https://cors-anywhere.herokuapp.com/https://bittrex.com/api/v1.1/public/getmarketsummaries';
 var added = [];
 var loadingComplete = summariesLoading = false;
 $searchInput.keyup(function(event){
@@ -312,7 +312,7 @@ function priceChange(coin){
 	change=change.toFixed(3);
 	var indicator = (change>=0)?"▲ ":"▼ ";
 	var $changeContainer = $("<td>").attr("class","portfolioChange").text(indicator+change+"%");
-	var color = (change>=0)?"#339933":"#ff3333";
+	var color = (change>=0)?"#99ff66":"#ff9999";
 	$changeContainer.attr("style", "color: "+color+";");
 	return $changeContainer;
 }
@@ -453,8 +453,7 @@ tickerEl.setAttribute("class", "ticker");
 tickerEl.width=window.innerWidth;
 this.tickerEl.height=35;
 var ctx = tickerEl.getContext('2d');
-ctx.fillStyle='black';
-ctx.fillRect(0,0,tickerEl.width,tickerEl.height);
+
 $header.prepend(tickerEl);
 
 /*var marketSummariesTest = [];
@@ -479,19 +478,20 @@ function Ticker(){
 				}
 				this.offset=0;
 			}
-			ctx.fillStyle = 'black';
-		    ctx.fillRect(0,0,tickerEl.width,tickerEl.height);
+			//ctx.fillStyle = 'slateblue';
+		    //ctx.fillRect(0,0,tickerEl.width,tickerEl.height);
+		    ctx.clearRect(0, 0, tickerEl.width, tickerEl.height);
 			for(var i = 0; i<this.count; i++){
 				ctx.fillStyle = 'white';
-				ctx.font = '18px \'Ubuntu Mono\'';
+				ctx.font = '10px \'Press Start 2P\'';
 				if(i+this.incrementers[i] == marketSummaries.length)
 					this.incrementers[i]=-i;
 				var current = marketSummaries[i+this.incrementers[i]];
 				var name = current['MarketName'];
 				ctx.fillText(name+" ", i*this.elWidth-this.offset+5,23);
 				var change = (current['Last']/current['PrevDay'])*100-100;
-				ctx.fillStyle = (change==0)?"gray":(change>=0)?"lightgreen":"#ff6666";
-				ctx.font = ('14px monospace');
+				ctx.fillStyle = (change==0)?"#ffffff":(change>=0)?"#99ff66":"#ff9999";
+				ctx.font = ('9px \'Press Start 2P\'');
 				ctx.fillText(current['Last'].toFixed(8)+"("+change.toFixed(3)+"%)", 
 							i*this.elWidth-this.offset+name.length*12, 22);
 				

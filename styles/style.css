@@ -6,8 +6,7 @@
 
 html {
   height: 100%;
-  background: white;
-  color: #404040;
+  color: whitesmoke;
 }
 
 body {
@@ -16,6 +15,7 @@ body {
   max-height: 900px;
   margin: auto;
   font-family: "ubuntu", sans-serif;
+  background: linear-gradient(180deg, slateblue, purple);
 }
 
 h1, .portfolioContainer {
@@ -23,7 +23,7 @@ h1, .portfolioContainer {
 }
 
 header {
-  background: white;
+  background: none;
   padding-bottom: 10px;
 }
 
@@ -36,6 +36,7 @@ h1 {
   min-width: 970px;
   max-width: 1285px;
   text-align: left;
+  background: none;
 }
 
 main {
@@ -57,8 +58,8 @@ main, .portfolioContainer {
   display: inline-block;
   border-radius: 10px;
   overflow: auto;
-  background: white;
-  color: black;
+  background: none;
+  color: whitesmoke;
   width: 70%;
   max-width: 900px;
   min-width: 500px;
@@ -77,16 +78,16 @@ main, .portfolioContainer {
   border-spacing: 0px;
 }
 #portfolio th {
-  background: white;
+  background: none;
   font-weight: normal;
   font-size: 1.2em;
-  color: #404040;
+  color: whitesmoke;
   border-bottom: 1px solid gray;
 }
 #portfolio tr {
   display: table-row;
-  background: whitesmoke;
-  color: black;
+  background: none;
+  color: whitesmoke;
   margin: 0;
   overflow: visible;
   position: relative;
@@ -106,8 +107,8 @@ main, .portfolioContainer {
   border-bottom: 1px solid gray;
 }
 #portfolio tr:nth-child(odd) {
-  background: white;
-  color: black;
+  background: none;
+  color: whitesmoke;
 }
 
 .editButton {
@@ -152,7 +153,7 @@ main, .portfolioContainer {
   position: fixed;
   height: 200px;
   width: 500px;
-  background: #333333;
+  background: rgba(0, 0, 0, 0.5);
 }
 
 #deleteForm {
@@ -200,7 +201,7 @@ p {
   max-width: 385px;
   min-width: 200px;
   border-radius: 10px;
-  background: white;
+  background: none;
   overflow: auto;
 }
 
@@ -229,7 +230,7 @@ li {
   list-style: none;
   border-bottom: solid 1px black;
   padding: 15px 0;
-  color: black;
+  color: white;
   width: 90%;
   text-align: left;
   margin: 0 auto;
@@ -284,7 +285,7 @@ button[name=searchAdd] {
   position: fixed;
   height: 200px;
   width: 500px;
-  background: #333333;
+  background: rgba(0, 0, 0, 0.5);
   color: white;
 }
 

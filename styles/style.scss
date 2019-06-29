@@ -1,23 +1,23 @@
 $ubuntuFont: 'ubuntu', sans-serif;
 $ZCOOLFont: 'ZCOOL QingKe HuangYou', cursive;
 $ubuntuMonoFont: 'Ubuntu Mono', monospace;
-$background:  white;
-$headerColor: #404040;
+$background:  none;
+$headerColor: whitesmoke;
 $portfolioBackground: white;
-$portfolioColor: black;
-$portfolioElEvenBackground: whitesmoke;
-$portfolioElEvenColor: black;
-$portfolioElOddBackground:  white;
-$portfolioElOddColor: black;
-$searchBackground: white;
+$portfolioColor: whitesmoke;
+$portfolioElEvenBackground: none;
+$portfolioElEvenColor: whitesmoke;
+$portfolioElOddBackground:  none;
+$portfolioElOddColor: whitesmoke;
+$searchBackground: none;
 $searchInputBackground: #f2f2f2;
 $listElFont: 'ubuntu', sans-serif;
-$elColor: black;
+$elColor: white;
 $searchAddColor:  darkgray;
 $searchAddBackground:  #e6ffe6;
 $searchAddBorder: lightgreen;
 $promptBackground: rgba(10, 10, 10, 0.5);
-$addPromptBackground:  #333333;
+$addPromptBackground: rgba(0,0,0,.5);
 
 %verticalCenter {
 	position: relative;
@@ -27,7 +27,6 @@ $addPromptBackground:  #333333;
 
 html {
 	height: 100%;
-	background:  $background;
   color: $headerColor;
 }
 
@@ -37,7 +36,7 @@ body {
 	max-height: 900px;
 	margin: auto;
 	font-family: $ubuntuFont;
-	
+	background:  linear-gradient(180deg, slateblue, purple);
 }
 
 h1, .portfolioContainer{
@@ -45,7 +44,7 @@ h1, .portfolioContainer{
 }
 
 header{
-	background:  $background;
+	background: none;
 	padding-bottom: 10px;
 }
 
@@ -58,6 +57,7 @@ h1{
 	min-width: 970px;
 	max-width: 1285px;
 	text-align: left;
+	background: none;
 }
 
 main{
@@ -81,7 +81,7 @@ main, .portfolioContainer{
 	border-radius: 10px;
 	overflow: auto;
 	
-	background: $portfolioBackground;
+	background: none;
 	color: $portfolioColor;
 	width: 70%;
 	max-width: 900px;
@@ -101,7 +101,7 @@ main, .portfolioContainer{
 	max-height: 100%;
 	border-spacing: 0px;
 	th{
-		background: white;
+		background: none;
 		font-weight: normal;
     font-size: 1.2em;
 		color: $headerColor;
