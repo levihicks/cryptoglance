@@ -46,18 +46,27 @@ h1, .portfolioContainer{
 header{
 	background: none;
 	padding-bottom: 10px;
+	
+}
+
+.headerBottom{
+	border-bottom: 2px solid #ff6666;
+	border-top: 2px solid #9fdf9f;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	min-width: 970px;
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 5px 0;
 }
 
 h1{
-	border-bottom: 2px solid #ff6666;
-	border-top: 2px solid #9fdf9f;
+	display: inline-block;
   width: 200px;
-  margin: 10px auto 0 auto;
-	width: 92%;
-	min-width: 970px;
-	max-width: 1285px;
 	text-align: left;
 	background: none;
+	margin:0;
 }
 
 main{
@@ -238,6 +247,11 @@ p {
 	border-radius: 10px;
 	height: 25px;
 	margin-top: 3px;
+}
+
+.searchbar{
+	width: 25%;
+	display: inline-block;
 }
 
 #searchInput {
