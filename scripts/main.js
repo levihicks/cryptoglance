@@ -382,8 +382,13 @@ function updateHeader(){
 		let t = getCurrentPrice(added[i]) * added[i].quantity;
 		let b = (added[i].tag).split("-")[0];
 		if(b != "BTC"){
-			let priceInBTC = (marketSummaries.filter((m)=>m.MarketName==("BTC-"+b)))[0].Last;
-			t *= priceInBTC;
+			let priceInBTC = (marketSummaries.filter((m)=>m.MarketName==("BTC-"+b)))[0];
+			if (priceInBTC == undefined){
+				priceInBTC = (marketSummaries.filter((m)=>m.MarketName==(b+"-BTC")))[0].Last;
+				t /= priceInBTC
+			}else{
+				t *= priceInBTC.Last;
+			}
 		}
 		total+=t;
 	}
