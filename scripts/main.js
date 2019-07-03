@@ -377,24 +377,22 @@ function portfolioHead(){
 
 function updateHeader(){
 	$(".headerTotal").empty();
-	$totalPara = $("<p>");
 	let total = 0;
 	for(let i = 0; i < added.length; i++){
 		let t = getCurrentPrice(added[i]) * added[i].quantity;
-		console.log(t);
 		let b = (added[i].tag).split("-")[0];
 		if(b != "BTC"){
-			console.log("shoud only be once");
 			let priceInBTC = (marketSummaries.filter((m)=>m.MarketName==("BTC-"+b)))[0].Last;
 			t *= priceInBTC;
 		}
 		total+=t;
-		
 	}
-	$totalPara.text("Total: "+total.toFixed(8)+" BTC");
-	console.log("Total: "+total+" BTC")
-	$(".headerTotal").append($totalPara);
-
+	let usdTotal = (marketSummaries.filter((m)=>m.MarketName==("USD-BTC")))[0].Last * total;
+	let ethTotal = total / (marketSummaries.filter((m)=>m.MarketName==("BTC-ETH")))[0].Last;
+	$btcTotalPara = $("<p>").text(total.toFixed(8)+" BTC");
+	$ethTotalPara = $("<p>").text(ethTotal.toFixed(8)+" ETH");
+	$usdTotalPara = $("<p>").text("$"+usdTotal.toFixed(2));
+	$(".headerTotal").append($btcTotalPara, $ethTotalPara, $usdTotalPara);
 }
 
 function updatePortfolio(){

@@ -49,9 +49,20 @@ h1 {
 
 .headerTotal {
   display: inline-block;
-  font-style: italic;
   color: #e6e6e6;
   font-size: 1.1em;
+  height: inherit;
+}
+
+.headerTotal p {
+  padding-right: 10px;
+  padding-left: 10px;
+  border-left: 2px solid white;
+  height: inherit;
+}
+
+.headerTotal p:first-child {
+  border-left: none;
 }
 
 main {
