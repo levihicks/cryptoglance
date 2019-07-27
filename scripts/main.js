@@ -525,7 +525,7 @@ function Ticker(){
 			this.offset+=1;
 	}
 	this.updateSize = function(){
-		tickerEl.width=(window.innerWidth>970)?window.innerWidth:970;
+		tickerEl.width=(window.innerWidth>600)?window.innerWidth:600;
 
 	}
 }

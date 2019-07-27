@@ -6,30 +6,33 @@
 		<link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono|ZCOOL+QingKe+HuangYou" rel="stylesheet"> 
 		<link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet"> 
 		<link href="styles/style.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	</head>
-	<body>
+	<body class="container-fluid">
 		<header>
-			<div class="headerBottom">
-				<div class="headerLeft">
-					<h1>cryptoglance</h1>
-					<div class="headerTotal">
-
-					</div>
+			
+				<div class="headerBottom row align-items-md-center justify-content-md-center">
+						<div class="headerLeft col-xs-12 col-lg-7">
+							<div class="row  align-items-md-end">
+								<h1 class="col-xs-12 col-lg-4">cryptoglance</h1>
+								<div class="headerTotal col-xs-12 col-lg-8"></div>
+							</div>
+						</div>
+						<div class="searchbar col-xs-12 col-lg-3">
+								<input class="form-control" id="searchInput" type="text" placeholder="Search currencies...">
+						</div>
 				</div>
-				<div class="searchbar">
-						<input id="searchInput" type="text" placeholder="Search currencies...">
-				</div>
-			</div>
+			
 		</header>
 		<main>
-			<div class="portfolioContainer">
-				<div class="msg">
-					<p>No coins in your portfolio.</p>
+			<div class="row justify-content-md-center">
+				<div class="portfolioContainer col-lg-7">
+					<div class="msg">
+						<p>No coins in your portfolio.</p>
+					</div>
 				</div>
-			</div>
-			<div class="search">
-				
-				<div class="searchResults">
+			
+				<div class="searchResults col-lg-3 order-first order-lg-last">
 					<ul>
 
 					</ul>

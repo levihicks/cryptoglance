@@ -27,6 +27,7 @@ $addPromptBackground: rgba(0,0,0,.5);
 
 html {
 	height: 100%;
+	min-width: 600px;
   color: $headerColor;
 }
 
@@ -37,6 +38,7 @@ body {
 	margin: auto;
 	font-family: $ubuntuFont;
 	background:  linear-gradient(180deg, slateblue, purple);
+  background-attachment: fixed;
 }
 
 h1, .portfolioContainer{
@@ -46,32 +48,26 @@ h1, .portfolioContainer{
 header{
 	background: none;
 	padding-bottom: 10px;
+	overflow-x: hidden;
 	
 }
 
 .headerBottom{
 	border-bottom: 2px solid #ff6666;
 	border-top: 2px solid #9fdf9f;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	min-width: 970px;
-	max-width: 1280px;
-	margin: 0 auto;
+  background-color: rgba(128,128,128,.2);
 	padding: 5px 0;
+
 }
 
 h1{
-	display: inline-block;
-  width: 200px;
-	text-align: left;
+	text-align: center;
 	background: none;
-	margin:0;
 }
 
 .headerTotal{
 	display: inline-block;
-  
+  	text-align: center;
   color: #e6e6e6;
 	font-size: 1.1em;
 	height: inherit;
@@ -91,8 +87,12 @@ h1{
 
 main{
 	width: 100%;
-  min-width: 970px;
+
 	height: 90%;
+}
+
+.portfolioAndSearch{
+	max-width: 1280px;
 }
 
 main, .portfolioContainer{
@@ -254,12 +254,16 @@ p {
   height: 100%;
 	min-height: 300px;
 	max-height: 900px;
-	width: 25%;
-	max-width: 385px;
-	min-width: 200px;
+
+	
+	
 	border-radius: 10px;
 	background: $searchBackground;
 	overflow: auto;
+}
+
+.searchResults{
+	width: inherit;
 }
 
 #searchInput, button[name=searchButton] {
@@ -270,15 +274,14 @@ p {
 }
 
 .searchbar{
-	width: 25%;
-	display: inline-block;
+
 }
 
 #searchInput {
-	width: 80%;
+
 	background: $searchInputBackground;
 	font-family: $ubuntuFont;
-	padding-left: 5px;
+	
 }
 
 ul {
@@ -340,6 +343,7 @@ button[name=searchAdd]{
 	position: fixed;
 	background-color: $promptBackground;
 	top: 0;
+	left:0;
 }
 
 .addPrompt{
