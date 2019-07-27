@@ -50,7 +50,7 @@ function promptBackground(){
 
 function addPrompt(){
 	var $addPrompt = $("<div>").attr("class", "addPrompt");
-	$addPrompt.offset({top: (window.innerHeight/2)-100, left: (window.innerWidth/2)-250});
+	//$addPrompt.offset({top: (window.innerHeight/2)-100, left: (window.innerWidth/2)-250});
 	return $addPrompt;
 }
 
@@ -118,6 +118,8 @@ function confirmAddClick(event){
 		updateLocal();
 		removeAddPrompt($cancelButtonDiv.parent());
 		updatePortfolio();
+		$("#searchInput").val("");
+		$searchList.empty();
 	}
 }
 
@@ -474,63 +476,70 @@ function checkLocal(){
 	portfolioMsg(msg);
 }
 
-var tickerEl = document.createElement('canvas');
-tickerEl.setAttribute("class", "ticker");
-tickerEl.width=window.innerWidth;
-this.tickerEl.height=35;
-var ctx = tickerEl.getContext('2d');
+if(window.innerWidth>=600){
+	var tickerEl = document.createElement('canvas');
+	tickerEl.setAttribute("class", "ticker");
+	tickerEl.width=window.innerWidth;
+	this.tickerEl.height=35;
+	var ctx = tickerEl.getContext('2d');
 
-$header.prepend(tickerEl);
+	$header.prepend(tickerEl);
 
-/*var marketSummariesTest = [];
-marketSummariesTest.push({'MarketName':'USDT-TSD1', 'Last': 1.00490029, 'PrevDay': 1});
-marketSummariesTest.push({'MarketName':'USDT-TSD2', 'Last': 1.00490029, 'PrevDay': 1});
-marketSummariesTest.push({'MarketName':'USDT-TSD3', 'Last': 1.00490029, 'PrevDay': 1});
-marketSummariesTest.push({'MarketName':'USDT-TSD4', 'Last': 1.00490029, 'PrevDay': 1});
-marketSummariesTest.push({'MarketName':'USDT-TSD5', 'Last': 1.00490029, 'PrevDay': 1});
-*/
+	/*var marketSummariesTest = [];
+	marketSummariesTest.push({'MarketName':'USDT-TSD1', 'Last': 1.00490029, 'PrevDay': 1});
+	marketSummariesTest.push({'MarketName':'USDT-TSD2', 'Last': 1.00490029, 'PrevDay': 1});
+	marketSummariesTest.push({'MarketName':'USDT-TSD3', 'Last': 1.00490029, 'PrevDay': 1});
+	marketSummariesTest.push({'MarketName':'USDT-TSD4', 'Last': 1.00490029, 'PrevDay': 1});
+	marketSummariesTest.push({'MarketName':'USDT-TSD5', 'Last': 1.00490029, 'PrevDay': 1});
+	*/
 
-function Ticker(){
-	this.elWidth = this.offset = 280;
-	this.count = 20;
-	this.incrementers = [this.count];
-	for(let i = 0; i < this.count; i++){
-		this.incrementers[i]=-1;
-	}
-	this.tick = function (){
-			if(this.offset==this.elWidth){
-				for(let i = 0; i < this.count; i++){
-					this.incrementers[i]+=1;
+	function Ticker(){
+		this.elWidth = this.offset = 280;
+		this.count = 20;
+		this.incrementers = [this.count];
+		for(let i = 0; i < this.count; i++){
+			this.incrementers[i]=-1;
+		}
+		this.tick = function (){
+				if(this.offset==this.elWidth){
+					for(let i = 0; i < this.count; i++){
+						this.incrementers[i]+=1;
+					}
+					this.offset=0;
 				}
-				this.offset=0;
-			}
-			//ctx.fillStyle = 'slateblue';
-		    //ctx.fillRect(0,0,tickerEl.width,tickerEl.height);
-		    ctx.clearRect(0, 0, tickerEl.width, tickerEl.height);
-			for(var i = 0; i<this.count; i++){
-				ctx.fillStyle = 'white';
-				ctx.font = '10px \'Press Start 2P\'';
-				if(i+this.incrementers[i] == marketSummaries.length)
-					this.incrementers[i]=-i;
-				var current = marketSummaries[i+this.incrementers[i]];
-				var name = current['MarketName'];
-				ctx.fillText(name+" ", i*this.elWidth-this.offset+5,23);
-				var change = (current['Last']/current['PrevDay'])*100-100;
-				ctx.fillStyle = (change==0)?"#ffffff":(change>=0)?"#99ff66":"#ff9999";
-				ctx.font = ('9px \'Press Start 2P\'');
-				ctx.fillText(current['Last'].toFixed(8)+"("+change.toFixed(3)+"%)", 
-							i*this.elWidth-this.offset+name.length*12, 22);
-				
-			}
-			this.offset+=1;
-	}
-	this.updateSize = function(){
-		tickerEl.width=(window.innerWidth>600)?window.innerWidth:600;
+				//ctx.fillStyle = 'slateblue';
+			    //ctx.fillRect(0,0,tickerEl.width,tickerEl.height);
+			    ctx.clearRect(0, 0, tickerEl.width, tickerEl.height);
+				for(var i = 0; i<this.count; i++){
+					ctx.fillStyle = 'white';
+					ctx.font = '10px \'Press Start 2P\'';
+					if(i+this.incrementers[i] == marketSummaries.length)
+						this.incrementers[i]=-i;
+					var current = marketSummaries[i+this.incrementers[i]];
+					var name = current['MarketName'];
+					ctx.fillText(name+" ", i*this.elWidth-this.offset+5,23);
+					var change = (current['Last']/current['PrevDay'])*100-100;
+					ctx.fillStyle = (change==0)?"#ffffff":(change>=0)?"#99ff66":"#ff9999";
+					ctx.font = ('9px \'Press Start 2P\'');
+					ctx.fillText(current['Last'].toFixed(8)+"("+change.toFixed(3)+"%)", 
+								i*this.elWidth-this.offset+name.length*12, 22);
+					
+				}
+				this.offset+=1;
+		}
+		this.updateSize = function(){
+			tickerEl.width=(window.innerWidth>600)?window.innerWidth:600;
 
+		}
 	}
+
+	var ticker1 = new Ticker();
+	function loop(){
+		ticker1.tick();
+		requestAnimationFrame(loop);
+	}
+	window.onresize = ticker1.updateSize;
 }
-
-
 function coinImage(coin){
 	var imgURL;
 	for(var i = 0; i < markets.length; i++){
@@ -548,12 +557,7 @@ function coinImage(coin){
 
 	return $coinImageContainer;
 }
-var ticker1 = new Ticker();
-function loop(){
-	ticker1.tick();
-	requestAnimationFrame(loop);
-}
-window.onresize = ticker1.updateSize;
+
 
 function LoadBoxes(){
 	var canvas = document.createElement('canvas');
