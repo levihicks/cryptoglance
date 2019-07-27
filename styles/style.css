@@ -1,4 +1,4 @@
-#deleteForm, .msg {
+#deleteForm {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
@@ -89,11 +89,6 @@ main, .portfolioContainer {
   max-width: 900px;
   min-width: 500px;
   height: 100%;
-}
-
-.msg {
-  text-align: center;
-  font-style: italic;
 }
 
 #portfolio {
